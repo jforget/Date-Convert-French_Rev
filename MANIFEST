@@ -1,0 +1,12 @@
+Changes
+French_Rev.pm
+MANIFEST
+Makefile.PL
+README
+eg/today
+t/00_loading.t
+t/10_rep2greg.t
+t/20_greg2rep.t
+t/30_newyearday.t
+t/40_newyearday.t
+t/50_format.t
