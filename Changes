@@ -3,3 +3,6 @@ Revision history for Perl extension Date::Convert::French_Rev.
 0.01  Wed May 23 11:43:17 2001
 	- original version; created by h2xs 1.19
 
+0.02  2001-06-07 (Tuesday)
+        - add the prerequisite for Roman.pm in Makefile.PL
+        - extend the "SEE ALSO" section

@@ -13,7 +13,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
@@ -629,7 +629,25 @@ based on Mordechai T. Abzug's work <morty@umbc.edu>
 
 =head1 SEE ALSO
 
+=head2 Software
+
 date(1), perl(1), Date::DateCalc(3), Date::Convert(3)
+
+calendar/cal-french.el in emacs-20.6 or xemacs 21.1.8
+
+=head2 books
+
+Quid 2001, M and D Frémy, publ. Robert Laffont
+
+Agenda Républicain 197 (1988/89), publ. Syros Alternatives
+
+Any French schoolbook about the French Revolution
+
+The French Revolution, Thomas Carlyle, Oxford University Press
+
+=head2 Internet
+
+http://www.faqs.org/faqs/calendars/faq/part3/
 
 =head1 LICENSE STUFF
 

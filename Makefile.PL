@@ -4,4 +4,5 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     'NAME'	=> 'Date::Convert::French_Rev',
     'VERSION_FROM' => 'French_Rev.pm', # finds $VERSION
+    'PREREQ_PM' => { Roman => 0 } # needs Roman.pm
 );
