@@ -13,7 +13,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
@@ -157,7 +157,8 @@ use constant NORMAL_YEAR    => 365;
 use constant LEAP_YEAR      => 366;
 use constant FOUR_YEARS     => 4 * NORMAL_YEAR + 1; # one leap year every four years
 use constant CENTURY        => 25 * FOUR_YEARS - 1; # centuries aren't leap years...
-use constant FOUR_CENTURIES => 4 * CENTURY + 1;     # ...except every four centuries.
+use constant FOUR_CENTURIES => 4 * CENTURY + 1;     # ...except every four centuries that are.
+use constant FOUR_MILLENIA  => 10 * FOUR_CENTURIES - 1; # ...except every four millenia that are not.
 
 # number of days between the start of the revolutionary calendar, and the
 # beginning of year n - 1
@@ -166,20 +167,23 @@ my @YEARS_BEGINS=    (0, 365, 730, 1096, 1461, 1826, 2191, 2557, 2922, 3287, 365
 
 sub initialize {
     my $self = shift;
-    my $year = shift || return Date::Convert::initialize;
-    my $month= shift ||
-	croak "Date::Convert::French_Rev::initialize needs more args";
-    my $day  = shift ||
-	croak "Date::Convert::French_Rev::initialize needs more args";
+    my ($year, $month, $day) = @_;
+    if (not defined($year) and not defined($month) and not defined($day))
+      { return Date::Convert::initialize }
+    if (not defined($year) or  not defined($month) or  not defined($day))
+      { croak "Date::Convert::French_Rev::initialize needs more args" }
     confess "These routines don't work well for French_Rev before year 1"
-	if $year<1;
+	if $year < 1;
     my $absol = REV_BEGINNING;
-    $$self{'year'} = $year;
-    $$self{'month'}= $month;
-    $$self{'day'}  = $day;
+    $$self{'year'}  = $year;
+    $$self{'month'} = $month;
+    $$self{'day'}   = $day;
 
     my $is_leap = is_leap Date::Convert::French_Rev $year;
+    croak "month $month out of range" if $month > 13 or $month <= 0;
+    croak "standard day number $day out of range" if $day <= 0 and $month <= 12;
     croak "standard day number $day out of range" if $day > 30 and $month <= 12;
+    croak "additional day $day out of range" if ($month == 13) and ($day <= 0);
     croak "additional day $day out of range" if ($month == 13) and ($day > 5) and !$is_leap;
     croak "additional day $day out of range" if ($month == 13) and ($day > 6) and $is_leap;
 
@@ -187,9 +191,11 @@ sub initialize {
     # first, convert year into days. . .
     if ($year >= 16) # Romme rule in effect, or nearly so
       {
-	$absol += int($year/400)* FOUR_CENTURIES;
+	$absol += int($year/4000) * FOUR_MILLENIA;
+	$year  %= 4000;
+	$absol += int($year/400) * FOUR_CENTURIES;
 	$year  %= 400;
-	$absol += int($year/100)* CENTURY;
+	$absol += int($year/100) * CENTURY;
 	$year  %= 100;
 	$absol += int($year/4)* FOUR_YEARS;
 	$year  %= 4;
@@ -218,34 +224,37 @@ sub year {
 	$days -= $YEARS_BEGINS[$year - 1];
 	$days++;
       }
-    elsif (($days+1) % FOUR_CENTURIES)  # normal case
+    else
       {
-	$year =  int ($days / FOUR_CENTURIES) * 400;
-	$days %= FOUR_CENTURIES;
-	$year += int ($days / CENTURY) * 100; # years.
-	$days %= CENTURY;
-	$year += int ($days / FOUR_YEARS) * 4;
-	$days %= FOUR_YEARS;
-	if (($days+1) % FOUR_YEARS) 
-	  {
-	    $year += int ($days /  NORMAL_YEAR); # fence post from year 1
-	    $days %= NORMAL_YEAR; 
-	    $days += 1; # today
-	    $year += 1;
-	  } 
-	else 
-	  {
-	    $year += int ($days / NORMAL_YEAR + 1) - 1;
-	    $days =  LEAP_YEAR;
-	  }
+	#$days --;
+	my $x;
+	$x     = int ($days / FOUR_MILLENIA);
+        $year += $x * 4000;
+	$days -= $x * FOUR_MILLENIA;
+
+	$x     = int ($days / FOUR_CENTURIES);
+        $year += $x * 400;
+	$days -= $x * FOUR_CENTURIES;
+
+	$x     = int ($days / CENTURY);
+        $x     = 3 if $x == 4; # last day of the 400-year period
+        $year += $x * 100;
+	$days -= $x * CENTURY;
+
+	$x     = int ($days / FOUR_YEARS);
+        $year += $x * 4;
+	$days -= $x * FOUR_YEARS;
+
+	$x     = int ($days / NORMAL_YEAR);
+        $x     = 3 if $x == 4; # last day of the 4-year period
+        $year += $x;
+	$days -= $x * NORMAL_YEAR;
+
+        ++$year; # because of 0-based mathematics vs 1-based chronology
+        ++$days;
       }
-    else # exact four century boundary.  Uh oh...
-      {
-	$year =  int ($days / FOUR_CENTURIES + 1) * 400;
-	$days =  LEAP_YEAR; # correction for later.
-      }
-    $$self{year}=$year;
-    $$self{days_into_year}=$days;
+    $$self{year}           = $year;
+    $$self{days_into_year} = $days;
     return $year;
 }
 
@@ -283,8 +292,11 @@ sub is_leap {
     return 0 if ($year < 20);
 
     # Romme rule from XX on
-    return 0 if (($year %4) || (($year % 400) && !($year % 100)));
-    return 1;
+    return 0 if $year %    4; # not a multiple of 4 -> normal year
+    return 1 if $year %  100; # a multiple of 4 but not of 100 -> leap year
+    return 0 if $year %  400; # a multiple of 100 but not of 400 -> normal year
+    return 1 if $year % 4000; # a multiple of 400 but not of 4000 -> leap
+    return 0; # multiple of 4000 -> normal year
 }
 
 sub field {
@@ -351,25 +363,23 @@ sub date_string {
   my ($self, $format) = @_;
 
   # Default value when not provided. I do not test true / false, because
-  # some pervert could think that "0" is a valid format, even if false.
+  # some adventurous mind could think that "0" is a valid format, even if false.
   $format = "%e %B %EY" if (! defined $format or $format eq '');
 
   my $year = roman($self->year); # possibly to trigger the side effect
   my $month = $self->month;
-  $_ = $format;
-  s/(          # start of $1
-    \%         # percent sign
-    (?:        # start of alternative
-     (?:O.)    # extended field specifier: O with a second char
-    |          # or
-     (?:E.)    # other extended field specifier: E with a second char
-    |          # or
-     .         # basic field specifier: single char
-    ))         # end of alternative and end of $1
-      /'$self->field($1)'/eegx; # is there a simpler way to do it?
+  $format =~ s/(          # start of $1
+               \%         # percent sign
+               (?:        # start of alternative
+                (?:O.)    # extended field specifier: O with a second char
+               |          # or
+                (?:E.)    # other extended field specifier: E with a second char
+               |          # or
+                .         # basic field specifier: single char
+               ))         # end of alternative and end of $1
+              /'$self->field($1)'/eegx; # is there a simpler way to do it?
 
-  return $_;
-  $_;
+  return $format;
 }
 
 # A module must return a true value. Traditionally, a module returns 1.
@@ -469,7 +479,7 @@ year - 00 to 99
 
 year - 0001 to 9999. There is no difference between these three variants. This is
 because in the Revolutionary calendar, the beginning of a year is always aligned
-with the beginning of a dE<eacute>cade, while in the Gregorian calendar, the beginning
+with the beginning of a décade, while in the Gregorian calendar, the beginning
 of a year is usually not aligned with the beginning of a week.
 
 =item %EY, %Ey
@@ -491,7 +501,7 @@ month abbreviation - Ven to Fru, or S-C for the end-of-year additional days
 
 =item %B
 
-month full name - VendE<eacute>miaire to Fructidor, or "jour complE<eacute>mentaire"
+month full name - Vendémiaire to Fructidor, or "jour complémentaire"
 for the end-of-year additional days.
 
 =item %d
@@ -504,19 +514,19 @@ day of month - " 1" to "30"
 
 =item %A
 
-day of dE<eacute>cade - "Primidi" to "DE<eacute>cadi". This value is irrelevant 
+day of décade - "Primidi" to "Décadi". This value is irrelevant 
 for additional days, therefore the field descriptor is replaced by the empty string.
 
 =item %a
 
-abbreviated day of dE<eacute>cade - "Pri" to "DE<eacute>c".
+abbreviated day of décade - "Pri" to "Déc".
 This value is irrelevant for additional days, therefore the field
 descriptor is replaced by a blank string. Beware: do not confuse
-Sep, Oct and DE<eacute>c with Gregorian calendar months
+Sep, Oct and Déc with Gregorian calendar months
 
 =item %w
 
-day of dE<eacute>cade - " 1" to "10" (" 1" for Primidi, " 2" for Duodi, etc)
+day of décade - " 1" to "10" (" 1" for Primidi, " 2" for Duodi, etc)
 This value is irrelevant for additional days, therefore the field
 descriptor is replaced by a blank string.
 
@@ -553,6 +563,52 @@ Neither are the composite field specifiers supported:
 
   %c, %C, %u, %g, %D, %x, %l, %r, %R, %T, %X, %V, %Q, %q, %P, %F, %J, %K
 
+=for diagnostics
+start description
+
+=head1 DIAGNOSTICS
+
+These   are   the   diagnostics   which  can   be   produced   by
+C<Date::Convert::French_Rev>.  The  explanations can be displayed
+when   the   error   is    produced   if   you   have   installed
+C<diagnostics.pm>, version 1.2. Just  insert one of the following
+lines in your script:
+
+    use diagnostics qw(-m=Date::Convert::French_Rev);
+    use diagnostics qw(-m=Date::Convert::French_Rev -m=perl);
+
+=for diagnostics
+start items
+
+=item month %s out of range
+
+The  French Revolutionary  calendar has  12 months,  plus 5  or 6
+additional  days that  do not  belong to  a month.  So  the month
+number  must be  in the  1-12 range  for normal  days, or  13 for
+additional days
+
+=item additional day %s out of range
+
+The day number for the end-of-year additional days is a number in
+the 1-5 range (or the 1-6 range for leap years).
+
+=item Date::Convert::French_Rev::initialize needs more args
+
+You  must provide  a year,  a month  number and  a day  number to
+C<Date::Convert::French_Rev::initialize>.
+
+=item standard day number %s out of range
+
+The day number for any normal month is in the 1-30 range.
+
+=item These routines don't work well for French_Rev before year 1
+
+If you  ask a negative  (Revolutionary) year, zero  included, the
+module may produce various errors, such as off-by-one conditions.
+
+=for diagnostics
+stop items
+
 =head1 KNOWN BUGS AND CAVEATS
 
 Not many bugs, but many caveats.
@@ -580,9 +636,9 @@ C<%Oy> are poorly documented, but usually they are not documented.
 
 The Revolutionary calendar was
 in use in France from 24 November 1793 (4 Frimaire II) to 31 December
-1805 (10 NivE<ocirc>se XIV). An attempt to use the decimal rule (the basis
+1805 (10 Nivôse XIV). An attempt to use the decimal rule (the basis
 of the metric system) to the calendar. Therefore, the week disappeared,
-replaced by the dE<eacute>cade (10 days, totally different from the English
+replaced by the décade (10 days, totally different from the English
 word "decade", 10 years). In addition, all months have exactly 3
 decades, no more, no less.
 
@@ -599,21 +655,21 @@ Carlyle proposes these translations for the month names:
 
 =over 4
 
-=item VendE<eacute>miaire -> Vintagearious
+=item Vendémiaire -> Vintagearious
 
 =item Brumaire -> Fogarious
 
 =item Frimaire -> Frostarious
 
-=item NivE<ocirc>se -> Snowous
+=item Nivôse -> Snowous
 
-=item PluviE<ocirc>se -> Rainous
+=item Pluviôse -> Rainous
 
-=item VentE<ocirc>se -> Windous
+=item Ventôse -> Windous
 
 =item Germinal -> Buddal
 
-=item FlorE<eacute>al -> Floweral
+=item Floréal -> Floweral
 
 =item Prairial -> Meadowal
 
@@ -631,13 +687,16 @@ Jean Forget <J-FORGET@wanadoo.fr>
 
 based on Mordechai T. Abzug's work <morty@umbc.edu>
 
+The development of this module is hosted by I<Les Mongueurs de Perl>,
+L<http://www.mongueurs.net>.
+
 =head1 SEE ALSO
 
 =head2 Software
 
 date(1), perl(1), Date::DateCalc(3), Date::Convert(3)
 
-calendar/cal-french.el in emacs-20.6 or xemacs 21.1.8
+calendar/cal-french.el in emacs-21.2 or xemacs 21.1.8
 
 =head2 books
 
@@ -655,7 +714,7 @@ http://www.faqs.org/faqs/calendars/faq/part3/
 
 =head1 LICENSE STUFF
 
-Copyright (c) 2001 Jean Forget. All rights reserved. This program is
+Copyright (c) 2001, 2002 Jean Forget. All rights reserved. This program is
 free software.  You can distribute, modify, and otherwise mangle
 Date::Convert::French_Rev under the same terms as perl.
 

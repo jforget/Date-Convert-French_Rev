@@ -1,12 +1,31 @@
 #!/usr/local/bin/perl -w
 
-# Check the sheband line, and then just call this script from your .profile
+# Check the shebang line, remove sharps depending on which modules
+# are installed
+# and then just call this script from your .profile
 
 use strict;
 use Date::Convert::French_Rev;
+# use Date::Discordian;
+# use Date::Tolkien::Shire;
+# use Date::Maya;
+# use Date::Roman;
 
 my ($y, $m, $d) = (localtime())[5, 4, 3];
 my $day =  new Date::Convert::Gregorian $y + 1900, $m + 1, $d;
 convert Date::Convert::French_Rev $day;
 print $day->date_string("Today is %A %d %B %EY, %Ej%n");
+# convert Date::Convert::Hebrew $day;
+# print "Hebrew: ", $day->date_string(), "\n";
 
+# $date = Date::Roman->new();
+# print "Roman: ", $date->as_string(), "\n";
+
+# $day =  new Date::Convert::Gregorian $y, $m, $d;
+# my ($long, $tzolkin, $haab) = julian_to_maya($day->absol);
+# print "Maya: long $long, Tzolkin $tzolkin, Haab $haab\n";
+
+# print discordian(time()), "\n";
+
+# my $shiredate = Date::Tolkien::Shire->new(time); 
+# print "Today is ", $shiredate->on_date, "\n";

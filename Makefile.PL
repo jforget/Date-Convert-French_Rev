@@ -1,8 +1,10 @@
 use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
+
 WriteMakefile(
-    'NAME'	=> 'Date::Convert::French_Rev',
-    'VERSION_FROM' => 'French_Rev.pm', # finds $VERSION
-    'PREREQ_PM' => { Roman => 0 } # needs Roman.pm
+      'NAME'	     => 'Date::Convert::French_Rev'
+   ,  'VERSION_FROM' => 'lib/Date/Convert/French_Rev.pm'
+   ,  'PREREQ_PM'    => {   Roman => 0
+		          , Date::Convert => 0 }
+   ,  'ABSTRACT'     => 'Date conversions using the French Revolutionary calendar'
+   ,  'AUTHOR'       => 'Jean Forget <JFORGET@cpan.org>'
 );
