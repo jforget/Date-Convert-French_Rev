@@ -13,7 +13,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
@@ -301,6 +301,7 @@ sub is_leap {
 
 sub field {
   my ($self, $spec) = @_;
+  my $decade_day = $self->day % 10;
   # below, a switch statement, more or less, as described in perlfaq7
 
   $spec eq '%d'		&& do { return sprintf "%02d", $self->day };
@@ -316,23 +317,12 @@ sub field {
   $spec eq '%t'		&& do { return "\t" };
   $spec eq '%+'		&& do { return '+' };
   $spec eq '%%'		&& do { return '%' };
-  if ($self->month < 13)
-    {
-      my $decade_day = $self->day % 10;
-      $spec eq '%a' && do { return $DECADE_DAYS_SHORT[$decade_day] };
-      $spec eq '%A' && do { return $DECADE_DAYS[$decade_day] };
-      $decade_day ||= 10;
-      $spec eq '%w' && do { return sprintf("%2d", $decade_day) };
-    }
-  else
-    {
-      $spec eq '%a' && do { return '   ' };
-      $spec eq '%A' && do { return '' };
-      $spec eq '%w' && do { return '  ' };
-    }
-  $spec eq '%EY'  && do { return Roman $self->year };
-  $spec eq '%Ey'  && do { return roman $self->year };
-  $spec eq '%Ej'  && do
+  $spec eq '%a'         && do { return $DECADE_DAYS_SHORT[$decade_day] };
+  $spec eq '%A'         && do { return $DECADE_DAYS[$decade_day] };
+  $spec eq '%w'         && do { return sprintf("%2d", $decade_day || 10) };
+  $spec eq '%EY'        && do { return Roman $self->year };
+  $spec eq '%Ey'        && do { return roman $self->year };
+  $spec eq '%Ej'        && do
     {
       my $jj = 30 * $self->month + $self->day - 31; # %j is 1..366, but $jj is 0..365
       my $lb = $DAYS[$jj];
@@ -419,6 +409,9 @@ Date::Convert, Roman
 Nothing.
 
 =head1 DESCRIPTION
+
+This module is obsolete. It is replaced by a module compatible with DateTime.pm:
+  DateTime::Calendar::FrenchRevolutionary
 
 The following methods are available:
 
@@ -514,21 +507,16 @@ day of month - " 1" to "30"
 
 =item %A
 
-day of décade - "Primidi" to "Décadi". This value is irrelevant 
-for additional days, therefore the field descriptor is replaced by the empty string.
+day of décade - "Primidi" to "Décadi".
 
 =item %a
 
-abbreviated day of décade - "Pri" to "Déc".
-This value is irrelevant for additional days, therefore the field
-descriptor is replaced by a blank string. Beware: do not confuse
+abbreviated day  of décade - "Pri"  to "Déc".  Beware:  do not confuse
 Sep, Oct and Déc with Gregorian calendar months
 
 =item %w
 
 day of décade - " 1" to "10" (" 1" for Primidi, " 2" for Duodi, etc)
-This value is irrelevant for additional days, therefore the field
-descriptor is replaced by a blank string.
 
 =item %j
 
@@ -613,44 +601,44 @@ stop items
 
 Not many bugs, but many caveats.
 
-Some day names correspond to little known plants. Therefore, I am not
-sure if they use the masculine gender or the feminine gender. I have found
-some in various dictionaries, but there still remain a few of them.
-Note: they are tagged with a 4, 5 or 6 code.
+Some day names correspond to  little known plants. Therefore, I am not
+sure if they  use the masculine gender or the  feminine gender. I have
+found some  in various dictionaries, but  there still remain  a few of
+them.  Note: they are tagged with a 4, 5 or 6 code.
 
-My sources disagree about the 4th additional day. One says "jour de l'opinion",
-the other says "jour de la raison".
+My sources  disagree about the 4th  additional day. One  says "jour de
+l'opinion", the other says "jour de la raison".
 
-Another disagreement is that some sources ignore the Romme rule, and
+Another disagreement is  that some sources ignore the  Romme rule, and
 use only the equinox rule. So, a 1- or 2-day difference can happen.
 
-This module inherits its user interface from Mordechai Abzug's
-C<Date::Convert>, which is, according to its author, "in pre-alpha
-state". Therefore, my module's user interface is also subject to changes.
+This  module  inherits  its  user  interface  from  Mordechai  Abzug's
+C<Date::Convert>,  which is,  according to  its author,  "in pre-alpha
+state".  Therefore, my  module's  user interface  is  also subject  to
+changes.
 
-I have check the manpage for C<date(1)> in two flavors of Unix: Linux
-and AIX. In the best case, the extended field descriptors C<%Ex> and
-C<%Oy> are poorly documented, but usually they are not documented.
+I  have checked the  manpage for  C<date(1)> in  two flavors  of Unix:
+Linux and AIX. In the best case, the extended field descriptors C<%Ex>
+and C<%Oy> are poorly documented, but usually they are not documented.
 
 =head1 HISTORICAL NOTES
 
-The Revolutionary calendar was
-in use in France from 24 November 1793 (4 Frimaire II) to 31 December
-1805 (10 Nivôse XIV). An attempt to use the decimal rule (the basis
-of the metric system) to the calendar. Therefore, the week disappeared,
-replaced by the décade (10 days, totally different from the English
-word "decade", 10 years). In addition, all months have exactly 3
-decades, no more, no less.
+The Revolutionary calendar was in  use in France from 24 November 1793
+(4 Frimaire II) to 31 December 1805 (10 Nivôse XIV). An attempt to use
+the  decimal   rule  (the   basis  of  the   metric  system)   to  the
+calendar. Therefore, the week  disappeared, replaced by the décade (10
+days, totally different from the  English word "decade", 10 years). In
+addition, all months have exactly 3 decades, no more, no less.
 
-At first, the year was beginning on the equinox of autumn, for two
-reasons. First, the republic had been established on 22 September 1792,
-which happened to be the equinox, and second, the equinox was the symbol of
-equality, the day and the night lasting exactly 12 hours each. It was
-therefore in tune with the republic's motto "Liberty, Equality,
-Fraternity". But it was not practical, so Romme proposed a leap year
-rule similar to the Gregorian calendar rule.
+At first,  the year was  beginning on the  equinox of autumn,  for two
+reasons.  First, the  republic had  been established  on  22 September
+1792, which  happened to be the  equinox, and second,  the equinox was
+the symbol of equality, the day and the night lasting exactly 12 hours
+each. It  was therefore  in tune with  the republic's  motto "Liberty,
+Equality, Fraternity". But  it was not practical, so  Romme proposed a
+leap year rule similar to the Gregorian calendar rule.
 
-In his book I<The French Revolution>, the 19th century writer Thomas
+In his book  I<The French Revolution>, the 19th  century writer Thomas
 Carlyle proposes these translations for the month names:
 
 =over 4
@@ -714,8 +702,8 @@ http://www.faqs.org/faqs/calendars/faq/part3/
 
 =head1 LICENSE STUFF
 
-Copyright (c) 2001, 2002 Jean Forget. All rights reserved. This program is
-free software.  You can distribute, modify, and otherwise mangle
-Date::Convert::French_Rev under the same terms as perl.
+Copyright  (c)  2001, 2002  Jean  Forget.  All  rights reserved.  This
+program is  free software.  You can distribute,  modify, and otherwise
+mangle Date::Convert::French_Rev under the same terms as perl.
 
 =cut

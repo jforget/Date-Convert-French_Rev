@@ -18,7 +18,7 @@ print $day->date_string("Today is %A %d %B %EY, %Ej%n");
 # convert Date::Convert::Hebrew $day;
 # print "Hebrew: ", $day->date_string(), "\n";
 
-# $date = Date::Roman->new();
+# my $date = Date::Roman->new();
 # print "Roman: ", $date->as_string(), "\n";
 
 # $day =  new Date::Convert::Gregorian $y, $m, $d;
