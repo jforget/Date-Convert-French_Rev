@@ -1,8 +1,14 @@
 Revision history for Perl extension Date::Convert::French_Rev.
 
-0.01  Wed May 23 11:43:17 2001
+0.01  4 Prairial CCIX (2001-05-23, Wednesday)
 	- original version; created by h2xs 1.19
 
-0.02  2001-06-07 (Tuesday)
+0.02  19 Prairial CCIX (2001-06-07, Thursday)
         - add the prerequisite for Roman.pm in Makefile.PL
         - extend the "SEE ALSO" section
+
+0.03  20 Thermidor CCIX (2001-08-07, Tuesday)
+        - rewrite the Changes file, with proper dates
+        - it seems that the 4th additional day should rather be "jour
+	de l'opinion"
+	- reformat the code

@@ -13,7 +13,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
@@ -34,7 +34,7 @@ my @DECADE_DAYS_SHORT = qw ( Déc Pri Duo Tri Qua Qui Sex Sep Oct Non);
 # Either it is a newbie who does not know how to make multi-dimensional arrays,
 # Or it is a (at least mildly) experienced Perl-coder who, for some reason, 
 # wants to initialize a flat array with the concatenation of lists.
-# I am a (mildly) experienced programmer who wants to use qw() and yet insert
+# I am a (at least mildly) experienced programmer who wants to use qw() and yet insert
 # comments in some places.
 my @DAYS = (
 # Vendémiaire
@@ -147,7 +147,7 @@ my @DAYS = (
 	),
 # Jours complémentaires
 	qw(
-       1vertu            0génie            0travail          1raison           3récompenses
+       1vertu            0génie            0travail          2opinion          3récompenses
        1révolution
 	 ));
 
@@ -156,8 +156,8 @@ my @PREFIXES = ('jour du ', 'jour de la ', "jour de l'", 'jour des ');
 use constant NORMAL_YEAR    => 365;
 use constant LEAP_YEAR      => 366;
 use constant FOUR_YEARS     => 4 * NORMAL_YEAR + 1; # one leap year every four years
-use constant CENTURY        => 25 * FOUR_YEARS - 1; # centuries aren't leap years . . .
-use constant FOUR_CENTURIES => 4 * CENTURY + 1;     # . . .except every four centuries.
+use constant CENTURY        => 25 * FOUR_YEARS - 1; # centuries aren't leap years...
+use constant FOUR_CENTURIES => 4 * CENTURY + 1;     # ...except every four centuries.
 
 # number of days between the start of the revolutionary calendar, and the
 # beginning of year n - 1
@@ -218,26 +218,32 @@ sub year {
 	$days -= $YEARS_BEGINS[$year - 1];
 	$days++;
       }
-    elsif (($days+1) % FOUR_CENTURIES) { # normal case
+    elsif (($days+1) % FOUR_CENTURIES)  # normal case
+      {
 	$year =  int ($days / FOUR_CENTURIES) * 400;
 	$days %= FOUR_CENTURIES;
 	$year += int ($days / CENTURY) * 100; # years.
 	$days %= CENTURY;
 	$year += int ($days / FOUR_YEARS) * 4;
 	$days %= FOUR_YEARS;
-	if (($days+1) % FOUR_YEARS) {
+	if (($days+1) % FOUR_YEARS) 
+	  {
 	    $year += int ($days /  NORMAL_YEAR); # fence post from year 1
 	    $days %= NORMAL_YEAR; 
 	    $days += 1; # today
 	    $year += 1;
-	} else {
+	  } 
+	else 
+	  {
 	    $year += int ($days / NORMAL_YEAR + 1) - 1;
 	    $days =  LEAP_YEAR;
-	}
-    } else { # exact four century boundary.  Uh oh. . .
+	  }
+      }
+    else # exact four century boundary.  Uh oh...
+      {
 	$year =  int ($days / FOUR_CENTURIES + 1) * 400;
 	$days =  LEAP_YEAR; # correction for later.
-    }
+      }
     $$self{year}=$year;
     $$self{days_into_year}=$days;
     return $year;
@@ -256,16 +262,12 @@ sub month {
     return $month;
 }
 
-
-
 sub day {
     my $self = shift;
     return $$self{day} if exists $$self{day};
     $self->month; # calculates day as a side-effect
     return $$self{day};
 }
-
-
 
 sub date {
     my $self = shift;
@@ -287,6 +289,8 @@ sub is_leap {
 
 sub field {
   my ($self, $spec) = @_;
+  # below, a switch statement, more or less, as described in perlfaq7
+
   $spec eq '%d'		&& do { return sprintf "%02d", $self->day };
   $spec eq '%j'		&& do { return sprintf "%03d", 30 * $self->month + $self->day - 30 };
   $spec eq '%e'		&& do { return sprintf "%2d",  $self->day };
