@@ -7,4 +7,5 @@ WriteMakefile(
 		          , Date::Convert => 0 }
    ,  'ABSTRACT'     => 'Date conversions using the French Revolutionary calendar'
    ,  'AUTHOR'       => 'Jean Forget <JFORGET@cpan.org>'
+   ,  'LICENSE'	     => 'perl'
 );
