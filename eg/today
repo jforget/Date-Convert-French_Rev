@@ -40,6 +40,8 @@ print $day->date_string("Today is %A %d %B %EY, %Ej%n");
 
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 today - Print the current date in Gregorian and French Revolutionary formats.

@@ -392,6 +392,8 @@ sub usage {
 
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 g2r_table -  Print a few  charts which can  be used to convert  a date from the Gregorian calendar to the French Revolutionary calendar.

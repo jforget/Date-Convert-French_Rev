@@ -386,6 +386,8 @@ ou la mort !";
 
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 Date::Convert::French_Rev - Convert from / to French Revolutionary Calendar
