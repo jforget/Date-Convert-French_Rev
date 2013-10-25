@@ -577,6 +577,8 @@ lines in your script:
 =for diagnostics
 start items
 
+=over 4
+
 =item month %s out of range
 
 The  French Revolutionary  calendar has  12 months,  plus 5  or 6
@@ -602,6 +604,8 @@ The day number for any normal month is in the 1-30 range.
 
 If you  ask a negative  (Revolutionary) year, zero  included, the
 module may produce various errors, such as off-by-one conditions.
+
+=back
 
 =for diagnostics
 stop items
