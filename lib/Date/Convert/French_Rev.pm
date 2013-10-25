@@ -1,3 +1,4 @@
+# -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Perl Date::Convert extension to convert dates from/to the French Revolutionary calendar
 #     Copyright (C) 2001-2003, 2013 Jean Forget
@@ -17,24 +18,24 @@ require Exporter;
 @ISA = qw(Date::Convert Exporter);
 # Do not export methods, therefore export nothing
 @EXPORT = qw(
-	
+        
 );
 $VERSION = '0.05';
 
-use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
+use constant REV_BEGINNING => 2375840; # 1 VendÃ©miaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
-my @ADD_DAYS_SHORT= qw ( Vertu Génie Trav Raison Récomp Révol);
-my @MONTHS = qw(Vendémiaire Brumaire  Frimaire
-                Nivôse      Pluviôse  Ventôse
-	        Germinal    Floréal   Prairial
-	        Messidor    Thermidor Fructidor);
-push @MONTHS, "jour complémentaire";
+my @ADD_DAYS_SHORT= qw ( Vertu GÃ©nie Trav Raison RÃ©comp RÃ©vol);
+my @MONTHS = qw(VendÃ©miaire Brumaire  Frimaire
+                NivÃ´se      PluviÃ´se  VentÃ´se
+                Germinal    FlorÃ©al   Prairial
+                Messidor    Thermidor Fructidor);
+push @MONTHS, "jour complÃ©mentaire";
 
 # The day numer 10 is counterintuitively placed in the 0-th element
 # because the modulus operator and the Perl arrays are 0-based.
 # It works. Do not report a bug.
-my @DECADE_DAYS = qw ( Décadi Primidi Duodi Tridi Quartidi Quintidi Sextidi Septidi Octidi Nonidi);
-my @DECADE_DAYS_SHORT = qw ( Déc Pri Duo Tri Qua Qui Sex Sep Oct Non);
+my @DECADE_DAYS = qw ( DÃ©cadi Primidi Duodi Tridi Quartidi Quintidi Sextidi Septidi Octidi Nonidi);
+my @DECADE_DAYS_SHORT = qw ( DÃ©c Pri Duo Tri Qua Qui Sex Sep Oct Non);
 
 # When initializing an array with lists within lists, it means one of two things:
 # Either it is a newbie who does not know how to make multi-dimensional arrays,
@@ -43,119 +44,119 @@ my @DECADE_DAYS_SHORT = qw ( Déc Pri Duo Tri Qua Qui Sex Sep Oct Non);
 # I am a (at least mildly) experienced programmer who wants to use qw() and yet insert
 # comments in some places.
 my @DAYS = (
-# Vendémiaire
-	qw(
-       0raisin           0safran           1châtaigne        1colchique        0cheval
+# VendÃ©miaire
+        qw(
+       0raisin           0safran           1chÃ¢taigne        1colchique        0cheval
        1balsamine        1carotte          2amarante         0panais           1cuve
-       1pomme_de_terre   2immortelle       0potiron          0réséda           2âne
+       1pomme_de_terre   2immortelle       0potiron          0rÃ©sÃ©da           2Ã¢ne
        1belle_de_nuit    1citrouille       0sarrasin         0tournesol        0pressoir
-       0chanvre          1pèche            0navet            2amaryllis        0boeuf
+       0chanvre          1pÃ¨che            0navet            2amaryllis        0boeuf
        2aubergine        0piment           1tomate           2orge             0tonneau
-	),
+        ),
 # Brumaire
-	qw(
-       1pomme            0céleri           1poire            1betterave        2oie
-       2héliotrope       1figue            1scorsonère       2alisier          1charrue
+        qw(
+       1pomme            0cÃ©leri           1poire            1betterave        2oie
+       2hÃ©liotrope       1figue            1scorsonÃ¨re       2alisier          1charrue
        0salsifis         1macre            0topinambour      2endive           0dindon
        4chervis          0cresson          1dentelaire       1grenade          1herse
        5bacchante        2azerole          1garance          2orange           0faisan
        1pistache         4macjon           0coing            0cormier          0rouleau
-	),
+        ),
 # Frimaire
-	qw(
-       1raiponce         0turneps          1chicorée         1nèfle            0cochon
-       1mâche            0chou-fleur       0miel             0genièvre         1pioche
-       1cire             0raifort          0cèdre            0sapin            0chevreuil
-       2ajonc            0cyprès           0lierre           1sabine           0hoyau
-       2érable-sucre     1bruyère          0roseau           2oseille          0grillon
-       0pignon           0liège            1truffe           2olive            1pelle
-	),
-# Nivôse
-	qw(
+        qw(
+       1raiponce         0turneps          1chicorÃ©e         1nÃ¨fle            0cochon
+       1mÃ¢che            0chou-fleur       0miel             0geniÃ¨vre         1pioche
+       1cire             0raifort          0cÃ¨dre            0sapin            0chevreuil
+       2ajonc            0cyprÃ¨s           0lierre           1sabine           0hoyau
+       2Ã©rable-sucre     1bruyÃ¨re          0roseau           2oseille          0grillon
+       0pignon           0liÃ¨ge            1truffe           2olive            1pelle
+        ),
+# NivÃ´se
+        qw(
        1tourbe           1houille          0bitume           0soufre           0chien
-       1lave             1terre_végétale   0fumier           0salpêtre         0fléau
-       0granit           2argile           2ardoise          0grès             0lapin
-       0silex            1marne            1pierre_à_chaux   0marbre           0van
-       1pierre_à_plâtre  0sel              0fer              0cuivre           0chat
-       2étain            0plomb            0zinc             0mercure          0crible
-	),
-# Pluviôse
-	qw(
-       5lauréole         1mousse           0fragon           0perce-neige      0taureau
-       0laurier-thym     2amadouvier       4mézéréon         0peuplier         1cognée
-       2ellébore         0brocoli          0laurier          2avelinier        1vache
+       1lave             1terre_vÃ©gÃ©tale   0fumier           0salpÃªtre         0flÃ©au
+       0granit           2argile           2ardoise          0grÃ¨s             0lapin
+       0silex            1marne            1pierre_Ã _chaux   0marbre           0van
+       1pierre_Ã _plÃ¢tre  0sel              0fer              0cuivre           0chat
+       2Ã©tain            0plomb            0zinc             0mercure          0crible
+        ),
+# PluviÃ´se
+        qw(
+       5laurÃ©ole         1mousse           0fragon           0perce-neige      0taureau
+       0laurier-thym     2amadouvier       4mÃ©zÃ©rÃ©on         0peuplier         1cognÃ©e
+       2ellÃ©bore         0brocoli          0laurier          2avelinier        1vache
        0buis             0lichen           2if               1pulmonaire       1serpette
-       0thlaspi          4thymelé          0chiendent        5trainasse        0lièvre
-       1guède            0noisetier        0cyclamen         1chélidoine       0traîneau
-	),
-# Ventôse
-	qw(
-       0tussilage        0cornouiller      0violier          0troène           0bouc
-       2asaret           2alaterne         1violette         0marsault         1bêche
-       0narcisse         2orme             1fumeterre        0vélar            1chèvre
-       2épinard          0doronic          0mouron           0cerfeuil         0cordeau
-       1mandragore       0persil           0cochléaria       1pâquerette       0thon
-       0pissenlit        1sylvie           0capillaire       0frêne            0plantoir
-	),
+       0thlaspi          4thymelÃ©          0chiendent        5trainasse        0liÃ¨vre
+       1guÃ¨de            0noisetier        0cyclamen         1chÃ©lidoine       0traÃ®neau
+        ),
+# VentÃ´se
+        qw(
+       0tussilage        0cornouiller      0violier          0troÃ¨ne           0bouc
+       2asaret           2alaterne         1violette         0marsault         1bÃªche
+       0narcisse         2orme             1fumeterre        0vÃ©lar            1chÃ¨vre
+       2Ã©pinard          0doronic          0mouron           0cerfeuil         0cordeau
+       1mandragore       0persil           0cochlÃ©aria       1pÃ¢querette       0thon
+       0pissenlit        1sylvie           0capillaire       0frÃªne            0plantoir
+        ),
 # Germinal
-	qw(
-       1primevère        0platane          2asperge          1tulipe           1poule
+        qw(
+       1primevÃ¨re        0platane          2asperge          1tulipe           1poule
        1blette           0bouleau          1jonquille        2aulne            0couvoir
-       1pervenche        0charme           1morille          0hêtre            2abeille
-       1laitue           0mélèze           1ciguë            0radis            1ruche
+       1pervenche        0charme           1morille          0hÃªtre            2abeille
+       1laitue           0mÃ©lÃ¨ze           1ciguÃ«            0radis            1ruche
        0gainier          1romaine          0marronnier       1roquette         0pigeon
-       0lilas            2anémone          1pensée           1myrtille         0greffoir
-	),
-# Floréal
-	qw(
-       1rose             0chêne            1fougère          2aubépine         0rossignol
+       0lilas            2anÃ©mone          1pensÃ©e           1myrtille         0greffoir
+        ),
+# FlorÃ©al
+        qw(
+       1rose             0chÃªne            1fougÃ¨re          2aubÃ©pine         0rossignol
        2ancolie          0muguet           0champignon       1jacinthe         0rateau
-       1rhubarbe         0sainfoin         0bâton-d'or       4chamérisier      0ver_à_soie
+       1rhubarbe         0sainfoin         0bÃ¢ton-d'or       4chamÃ©risier      0ver_Ã _soie
        1consoude         1pimprenelle      1corbeille-d'or   2arroche          0sarcloir
-       0statice          1fritillaire      1bourrache        1valériane        1carpe
-       0fusain           1civette          1buglosse         0sénevé           1houlette
-	),
+       0statice          1fritillaire      1bourrache        1valÃ©riane        1carpe
+       0fusain           1civette          1buglosse         0sÃ©nevÃ©           1houlette
+        ),
 # Prairial
-	qw(
-       1luzerne          6hémérocalle      0trèfle           2angélique        0canard
-       1mélisse          0fromental        0martagon         0serpolet         1faux
-       1fraise           1bétoine          0pois             2acacia           1caille
+        qw(
+       1luzerne          6hÃ©mÃ©rocalle      0trÃ¨fle           2angÃ©lique        0canard
+       1mÃ©lisse          0fromental        0martagon         0serpolet         1faux
+       1fraise           1bÃ©toine          0pois             2acacia           1caille
        2oeillet          0sureau           0pavot            0tilleul          1fourche
-       0barbeau          1camomille        0chèvrefeuille    0caille-lait      1tanche
+       0barbeau          1camomille        0chÃ¨vrefeuille    0caille-lait      1tanche
        0jasmin           1verveine         0thym             1pivoine          0chariot
-	),
+        ),
 # Messidor
-	qw(
-       0seigle           2avoine           2oignon           1véronique        0mulet
-       0romarin          0concombre        2échalotte        2absinthe         1faucille
-       0coriandre        2artichaut        1giroflée         1lavande          0chamois
+        qw(
+       0seigle           2avoine           2oignon           1vÃ©ronique        0mulet
+       0romarin          0concombre        2Ã©chalotte        2absinthe         1faucille
+       0coriandre        2artichaut        1giroflÃ©e         1lavande          0chamois
        0tabac            1groseille        1gesse            1cerise           0parc
-       1menthe           0cumin            0haricot          2orcanète         1pintade
-       1sauge            2ail              1vesce            0blé              5chalémie
-	),
+       1menthe           0cumin            0haricot          2orcanÃ¨te         1pintade
+       1sauge            2ail              1vesce            0blÃ©              5chalÃ©mie
+        ),
 # Thermidor
-	qw(
-       2épautre          0bouillon-blanc   0melon            2ivraie           0bélier
-       1prèle            2armoise          0carthame         1mûre             2arrosoir
+        qw(
+       2Ã©pautre          0bouillon-blanc   0melon            2ivraie           0bÃ©lier
+       1prÃ¨le            2armoise          0carthame         1mÃ»re             2arrosoir
        4panis            4salicor          2abricot          0basilic          1brebis
-       1guimauve         0lin              2amande           1gentiane         2écluse
-       1carline          0câprier          1lentille         2aunée            1loutre
+       1guimauve         0lin              2amande           1gentiane         2Ã©cluse
+       1carline          0cÃ¢prier          1lentille         2aunÃ©e            1loutre
        1myrte            0colza            0lupin            0coton            0moulin
-	),
+        ),
 # Fructidor
-	qw(
+        qw(
        1prune            0millet           0lycoperdon       2escourgeon       0saumon
-       1tubéreuse        4sucrion          2apocyn           1réglisse         2échelle
-       1pastèque         0fenouil          2épine-vinette    1noix             1truite
-       0citron           1cardère          0nerprun          0tagette          1hotte
-       2églantier        1noisette         0houblon          0sorgho           2écrevisse
-       5bagarade         1verge-d'or       0maïs             0marron           0panier
-	),
-# Jours complémentaires
-	qw(
-       1vertu            0génie            0travail          2opinion          3récompenses
-       1révolution
-	 ));
+       1tubÃ©reuse        4sucrion          2apocyn           1rÃ©glisse         2Ã©chelle
+       1pastÃ¨que         0fenouil          2Ã©pine-vinette    1noix             1truite
+       0citron           1cardÃ¨re          0nerprun          0tagette          1hotte
+       2Ã©glantier        1noisette         0houblon          0sorgho           2Ã©crevisse
+       5bagarade         1verge-d'or       0maÃ¯s             0marron           0panier
+        ),
+# Jours complÃ©mentaires
+        qw(
+       1vertu            0gÃ©nie            0travail          2opinion          3rÃ©compenses
+       1rÃ©volution
+         ));
 
 my @PREFIXES = ('jour du ', 'jour de la ', "jour de l'", 'jour des ');
 
@@ -169,7 +170,7 @@ use constant FOUR_MILLENIA  => 10 * FOUR_CENTURIES - 1; # ...except every four m
 # number of days between the start of the revolutionary calendar, and the
 # beginning of year n - 1
 my @YEARS_BEGINS=    (0, 365, 730, 1096, 1461, 1826, 2191, 2557, 2922, 3287, 3652,
-		   4018, 4383, 4748, 5113, 5479, 5844);
+                   4018, 4383, 4748, 5113, 5479, 5844);
 
 sub initialize {
     my $self = shift;
@@ -179,7 +180,7 @@ sub initialize {
     if (not defined($year) or  not defined($month) or  not defined($day))
       { croak "Date::Convert::French_Rev::initialize needs more args" }
     confess "These routines don't work well for French_Rev before year 1"
-	if $year < 1;
+        if $year < 1;
     my $absol = REV_BEGINNING;
     $$self{'year'}  = $year;
     $$self{'month'} = $month;
@@ -197,18 +198,18 @@ sub initialize {
     # first, convert year into days. . .
     if ($year >= 16) # Romme rule in effect, or nearly so
       {
-	$absol += int($year/4000) * FOUR_MILLENIA;
-	$year  %= 4000;
-	$absol += int($year/400) * FOUR_CENTURIES;
-	$year  %= 400;
-	$absol += int($year/100) * CENTURY;
-	$year  %= 100;
-	$absol += int($year/4)* FOUR_YEARS;
-	$year  %= 4;
-	$absol += $year * NORMAL_YEAR;
+        $absol += int($year/4000) * FOUR_MILLENIA;
+        $year  %= 4000;
+        $absol += int($year/400) * FOUR_CENTURIES;
+        $year  %= 400;
+        $absol += int($year/100) * CENTURY;
+        $year  %= 100;
+        $absol += int($year/4)* FOUR_YEARS;
+        $year  %= 4;
+        $absol += $year * NORMAL_YEAR;
       }
     else # table look-up for the programmer-hostile equinox rule
-      {	$absol += $YEARS_BEGINS[$year] }
+      { $absol += $YEARS_BEGINS[$year] }
 
     # now, month into days.
     $absol += 30 * ($month - 1) + $day - 1;
@@ -226,35 +227,35 @@ sub year {
     $days =  $$self{absol} - REV_BEGINNING;
     if ($days < $YEARS_BEGINS[16])
       {
-       	$year = scalar grep { $_ <= $days } @YEARS_BEGINS;
-	$days -= $YEARS_BEGINS[$year - 1];
-	$days++;
+        $year = scalar grep { $_ <= $days } @YEARS_BEGINS;
+        $days -= $YEARS_BEGINS[$year - 1];
+        $days++;
       }
     else
       {
-	#$days --;
-	my $x;
-	$x     = int ($days / FOUR_MILLENIA);
+        #$days --;
+        my $x;
+        $x     = int ($days / FOUR_MILLENIA);
         $year += $x * 4000;
-	$days -= $x * FOUR_MILLENIA;
+        $days -= $x * FOUR_MILLENIA;
 
-	$x     = int ($days / FOUR_CENTURIES);
+        $x     = int ($days / FOUR_CENTURIES);
         $year += $x * 400;
-	$days -= $x * FOUR_CENTURIES;
+        $days -= $x * FOUR_CENTURIES;
 
-	$x     = int ($days / CENTURY);
+        $x     = int ($days / CENTURY);
         $x     = 3 if $x == 4; # last day of the 400-year period
         $year += $x * 100;
-	$days -= $x * CENTURY;
+        $days -= $x * CENTURY;
 
-	$x     = int ($days / FOUR_YEARS);
+        $x     = int ($days / FOUR_YEARS);
         $year += $x * 4;
-	$days -= $x * FOUR_YEARS;
+        $days -= $x * FOUR_YEARS;
 
-	$x     = int ($days / NORMAL_YEAR);
+        $x     = int ($days / NORMAL_YEAR);
         $x     = 3 if $x == 4; # last day of the 4-year period
         $year += $x;
-	$days -= $x * NORMAL_YEAR;
+        $days -= $x * NORMAL_YEAR;
 
         ++$year; # because of 0-based mathematics vs 1-based chronology
         ++$days;
@@ -310,19 +311,19 @@ sub field {
   my $decade_day = $self->day % 10;
   # below, a switch statement, more or less, as described in perlfaq7
 
-  $spec eq '%d'		&& do { return sprintf "%02d", $self->day };
-  $spec eq '%j'		&& do { return sprintf "%03d", 30 * $self->month + $self->day - 30 };
-  $spec eq '%e'		&& do { return sprintf "%2d",  $self->day };
-  $spec eq '%m'		&& do { return sprintf "%02d", $self->month };
-  $spec eq '%f'		&& do { return sprintf "%2d",  $self->month };
-  $spec =~ /\%[YGL]/	&& do { return sprintf "%04d", $self->year };
-  $spec =~ /\%B/	&& do { return $MONTHS[$self->month - 1] };
-  $spec =~ /\%[bh]/	&& do { return $MONTHS_SHORT[$self->month - 1] };
-  $spec eq '%y'		&& do { return sprintf "%02d", $self->year % 100 };
-  $spec eq '%n'		&& do { return "\n" };
-  $spec eq '%t'		&& do { return "\t" };
-  $spec eq '%+'		&& do { return '+' };
-  $spec eq '%%'		&& do { return '%' };
+  $spec eq '%d'         && do { return sprintf "%02d", $self->day };
+  $spec eq '%j'         && do { return sprintf "%03d", 30 * $self->month + $self->day - 30 };
+  $spec eq '%e'         && do { return sprintf "%2d",  $self->day };
+  $spec eq '%m'         && do { return sprintf "%02d", $self->month };
+  $spec eq '%f'         && do { return sprintf "%2d",  $self->month };
+  $spec =~ /\%[YGL]/    && do { return sprintf "%04d", $self->year };
+  $spec =~ /\%B/        && do { return $MONTHS[$self->month - 1] };
+  $spec =~ /\%[bh]/     && do { return $MONTHS_SHORT[$self->month - 1] };
+  $spec eq '%y'         && do { return sprintf "%02d", $self->year % 100 };
+  $spec eq '%n'         && do { return "\n" };
+  $spec eq '%t'         && do { return "\t" };
+  $spec eq '%+'         && do { return '+' };
+  $spec eq '%%'         && do { return '%' };
   $spec eq '%a'         && do { return $DECADE_DAYS_SHORT[$decade_day] };
   $spec eq '%A'         && do { return $DECADE_DAYS[$decade_day] };
   $spec eq '%w'         && do { return sprintf("%2d", $decade_day || 10) };
@@ -380,7 +381,7 @@ sub date_string {
 
 # A module must return a true value. Traditionally, a module returns 1.
 # But this module is a revolutionary one, so it discards all old traditions.
-"Liberté, égalité, fraternité
+"LibertÃ©, Ã©galitÃ©, fraternitÃ©
 ou la mort !";
 
 __END__
@@ -478,7 +479,7 @@ year - 00 to 99
 
 year - 0001 to 9999. There is no difference between these three variants. This is
 because in the Revolutionary calendar, the beginning of a year is always aligned
-with the beginning of a décade, while in the Gregorian calendar, the beginning
+with the beginning of a dÃ©cade, while in the Gregorian calendar, the beginning
 of a year is usually not aligned with the beginning of a week.
 
 =item %EY, %Ey
@@ -500,7 +501,7 @@ month abbreviation - Ven to Fru, or S-C for the end-of-year additional days
 
 =item %B
 
-month full name - Vendémiaire to Fructidor, or "jour complémentaire"
+month full name - VendÃ©miaire to Fructidor, or "jour complÃ©mentaire"
 for the end-of-year additional days.
 
 =item %d
@@ -513,16 +514,16 @@ day of month - " 1" to "30"
 
 =item %A
 
-day of décade - "Primidi" to "Décadi".
+day of dÃ©cade - "Primidi" to "DÃ©cadi".
 
 =item %a
 
-abbreviated day  of décade - "Pri"  to "Déc".  Beware:  do not confuse
-Sep, Oct and Déc with Gregorian calendar months
+abbreviated day  of dÃ©cade - "Pri"  to "DÃ©c".  Beware:  do not confuse
+Sep, Oct and DÃ©c with Gregorian calendar months
 
 =item %w
 
-day of décade - " 1" to "10" (" 1" for Primidi, " 2" for Duodi, etc)
+day of dÃ©cade - " 1" to "10" (" 1" for Primidi, " 2" for Duodi, etc)
 
 =item %j
 
@@ -630,9 +631,9 @@ and C<%Oy> are poorly documented, but usually they are not documented.
 =head1 HISTORICAL NOTES
 
 The Revolutionary calendar was in  use in France from 24 November 1793
-(4 Frimaire II) to 31 December 1805 (10 Nivôse XIV). An attempt to use
+(4 Frimaire II) to 31 December 1805 (10 NivÃ´se XIV). An attempt to use
 the  decimal   rule  (the   basis  of  the   metric  system)   to  the
-calendar. Therefore, the week  disappeared, replaced by the décade (10
+calendar. Therefore, the week  disappeared, replaced by the dÃ©cade (10
 days, totally different from the  English word "decade", 10 years). In
 addition, all months have exactly 3 decades, no more, no less.
 
@@ -649,21 +650,21 @@ Carlyle proposes these translations for the month names:
 
 =over 4
 
-=item Vendémiaire -> Vintagearious
+=item VendÃ©miaire -> Vintagearious
 
 =item Brumaire -> Fogarious
 
 =item Frimaire -> Frostarious
 
-=item Nivôse -> Snowous
+=item NivÃ´se -> Snowous
 
-=item Pluviôse -> Rainous
+=item PluviÃ´se -> Rainous
 
-=item Ventôse -> Windous
+=item VentÃ´se -> Windous
 
 =item Germinal -> Buddal
 
-=item Floréal -> Floweral
+=item FlorÃ©al -> Floweral
 
 =item Prairial -> Meadowal
 
@@ -694,9 +695,9 @@ calendar/cal-french.el in emacs-21.2 or xemacs 21.1.8
 
 =head2 books
 
-Quid 2001, M and D Frémy, publ. Robert Laffont
+Quid 2001, M and D FrÃ©my, publ. Robert Laffont
 
-Agenda Républicain 197 (1988/89), publ. Syros Alternatives
+Agenda RÃ©publicain 197 (1988/89), publ. Syros Alternatives
 
 Any French schoolbook about the French Revolution
 

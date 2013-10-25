@@ -1,16 +1,18 @@
+-*- encoding: utf-8; indent-tabs-mode: nil -*-
 Revision history for Perl extension Date::Convert::French_Rev.
 
 0.06  ???
         - kwalitee issues and CPANTS game: license
+        - use UTF-8 instead of ISO-8859-1, use spaces instead of tabs
 
-0.05  Nonidi 9 Floréal CCXI, jour de la jacinthe (Monday 2003-04-28)
+0.05  Nonidi 9 FlorÃ©al CCXI, jour de la jacinthe (Monday 2003-04-28)
         - last version compatible with Date::Convert, next one will
         be in the DateTime::Calendar namespace, compatible with DateTime.pm
         - I had always believed that the additional days were not called
         Primidi, Duodi etc. But I have found a document where they are
         called Primidi etc. The bug in the module is fixed.
 
-0.04  Tridi 13 Fructidor CCX, jour de l'épine-vinette (Friday 2002-08-30)
+0.04  Tridi 13 Fructidor CCX, jour de l'Ã©pine-vinette (Friday 2002-08-30)
 	- reorganise the directory structure along Matt Sergeant's tips
         - include the 4000-modulus rule for leap years (according to emacs-21.2)
         - reorganise the absolute -> FR conversion
@@ -22,7 +24,7 @@ Revision history for Perl extension Date::Convert::French_Rev.
 	was not controlled
 	- compatibility with diagnostics-1.2
 
-0.03  Décadi 20 Thermidor CCIX, jour de l'écluse (Tuesday 2001-08-07)
+0.03  DÃ©cadi 20 Thermidor CCIX, jour de l'Ã©cluse (Tuesday 2001-08-07)
         - rewrite the Changes file, with proper dates
         - it seems that the 4th additional day should rather be "jour
 	de l'opinion"
@@ -32,5 +34,5 @@ Revision history for Perl extension Date::Convert::French_Rev.
         - add the prerequisite for Roman.pm in Makefile.PL
         - extend the "SEE ALSO" section
 
-0.01  Quartidi 4 Prairial CCIX, jour de l'angélique (Wednesday 2001-05-23)
+0.01  Quartidi 4 Prairial CCIX, jour de l'angÃ©lique (Wednesday 2001-05-23)
 	- original version; created by h2xs 1.19

@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl -w
+# -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Example of Date::Convert::French_Rev script to print the date in Gregorian 
 #     and French Revolutionary formats.

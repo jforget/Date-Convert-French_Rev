@@ -1,3 +1,4 @@
+# -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Test script for Date::Convert::French_Rev
 #     Copyright (C) 2001, 2002, 2003, 2013 Jean Forget
