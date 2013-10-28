@@ -26,19 +26,16 @@
 #     along with this program; if not, write to the Free Software Foundation,
 #     Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 #
+use Test::More;
 use Date::Convert::French_Rev;
 
 sub g2r {
-  my $n      = shift;
   my $date_r = shift;
   my $format = shift;
-  my $date   = new Date::Convert::Gregorian @_;
-  convert Date::Convert::French_Rev $date;
+  my $date   = Date::Convert::Gregorian->new(@_);
+  Date::Convert::French_Rev->convert($date);
   my $date_resul = $date->date_string($format);
-  if ($date_r eq $date_resul)
-    { print "ok $n\n" }
-  else
-    { print "not ok $n : expected $date_r, got $date_resul\n" }
+  is($date_r, $date_resul, "expected $date_r, got $date_resul");
 }
 
 my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
@@ -52,16 +49,23 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
              ["14 Plu, jour de l'avelinier 0209", "%d %b, %Ej %Y", 2001,  2,  2],
              ["14 Plu, Jour de l'Avelinier 0209", "%e %h, %EJ %G", 2001,  2,  2],
              ["14 Pluviôse, avelinier 0209",      "%e %B, %Oj %L", 2001,  2,  2],
-["Qua 14 Germinal CCIX, jour du hêtre", "%a %d %B %EY, %Ej", 2001, 4, 3],
-["Primidi 11 Vendémiaire ccix, Jour de la Pomme de terre", "%A %d %B %Ey, %EJ", 2000, 10, 2],
-[" 5 jour complémentaire 09, Jour des Récompenses", "%e %B %y, %EJ", 2001, 9, 21],
-["mois : 02  2, jour 046, jour du chervis", "mois : %m %f, jour %j, %Ej", 2000, 11, 6],
-[" 6 (Sextidi), jour de la bagarade", "%w (%A), %Ej", 2001, 9, 12],
+             ["Qua 14 Germinal CCIX, jour du hêtre", "%a %d %B %EY, %Ej", 2001, 4, 3],
+             ["Primidi 11 Vendémiaire ccix, Jour de la Pomme de terre", "%A %d %B %Ey, %EJ", 2000, 10, 2],
+             ["Primidi 11 Vendémiaire CCXIX, jour de la pomme de terre", 
+		"%A %d %B %EY, %*", 2010, 10, 2],
+             ["Quintidi 25 Vendémiaire CCXIX, jour du bœuf", 
+		"%A %d %B %EY, %*", 2010, 10, 16],
+             ["Sextidi 16 Prairial CCXIX, jour de l'œillet", 
+		"%A %d %B %EY, %*", 2011,  6,  4],
+             [" 5 jour complémentaire 09, Jour des Récompenses", "%e %B %y, %EJ", 2001, 9, 21],
+             ["mois : 02  2, jour 046, jour du chervis", "mois : %m %f, jour %j, %Ej", 2000, 11, 6],
+             [" 6 (Sextidi), jour de la bagarade", "%w (%A), %Ej", 2001, 9, 12],
+             ["Décadi Déc 10", "%A %a %d", 1794, 7, 28],
+	     # almost every specifier
              );
 
 my $nb_tests = @tests;
-my $n = 1;
 
-print "1..$nb_tests\n";
+plan(tests => $nb_tests);
 
-foreach (@tests) { g2r $n++, @$_ }
+foreach (@tests) { g2r @$_ }

@@ -26,21 +26,16 @@
 #     along with this program; if not, write to the Free Software Foundation,
 #     Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 #
+use Test::More;
 use Date::Convert::French_Rev;
 
-my $n = 1;
-
 sub g2r {
-  my $n      = shift;
   my $date_r = shift;
   my $format = shift;
-  my $date = new Date::Convert::Gregorian @_;
-  convert Date::Convert::French_Rev $date;
+  my $date = Date::Convert::Gregorian->new(@_);
+  Date::Convert::French_Rev->convert($date);
   my $date_resul = $date->date_string($format);
-  if ($date_r eq $date_resul)
-    { print "ok $n\n" }
-  else
-    { print "not ok $n : expected $date_r, got $date_resul\n" }
+  is($date_r, $date_resul, "expected $date_r, got $date_resul");
 }
 
 
@@ -96,6 +91,6 @@ sub g2r {
           ["Jour de la Révolution CDVIII",  "%EJ %EY", 2200,  9, 22],
           );
 
-printf "1..%d\n", scalar @tests;
+plan(tests => scalar @tests);
 
-foreach (@tests) { g2r $n++, @$_ }
+foreach (@tests) { g2r @$_ }

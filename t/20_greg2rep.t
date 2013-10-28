@@ -26,21 +26,16 @@
 #     along with this program; if not, write to the Free Software Foundation,
 #     Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 #
+use Test::More;
 use Date::Convert::French_Rev;
 
-my $n = 1;
-
 sub g2r {
-  my $n      = shift;
   my $date_r = shift;
   my $format = shift;
-  my $date   = new Date::Convert::Gregorian @_;
-  convert Date::Convert::French_Rev $date;
+  my $date   = Date::Convert::Gregorian->new(@_);
+  Date::Convert::French_Rev->convert($date);
   my $date_resul = $date->date_string($format);
-  if ($date_r eq $date_resul)
-    { print "ok $n\n" }
-  else
-    { print "not ok $n : expected $date_r, got $date_resul\n" }
+  is($date_r, $date_resul, "expected $date_r, got $date_resul");
 }
 
 @tests = ([" 1 Vendémiaire I",    "", 1792,  9, 22],
@@ -60,9 +55,17 @@ sub g2r {
           ["18 Fructidor XXIV",   "", 1816,  9,  4],
           ["12 Nivôse CCVIII",    "", 2000,  1,  1], # Y2K compatible?
           ["22 Floréal CCIX",     "", 2001,  5, 11],
+	  ["12 Nivôse MCCVIII",   "", 3000,  1,  1],
+	  ["11 Nivôse MCCIX",     "", 3001,  1,  1],
+	  ["12 Nivôse MMCCVIII",  "", 4000,  1,  1],
+	  ["12 Nivôse MMCCIX",    "", 4001,  1,  1],
+	  ["12 Nivôse MMMCCVIII", "", 5000,  1,  1],
+	  ["11 Nivôse MMMCCIX",   "", 5001,  1,  1],
+	  ["13 Nivôse 4208",      "", 6000,  1,  1],
+	  ["13 Nivôse 4209",      "", 6001,  1,  1],
           );
 
-printf "1..%d\n", scalar @tests;
+plan(tests => scalar @tests);   
 
-foreach (@tests) { g2r $n++, @$_ }
+foreach (@tests) { g2r @$_ }
 

@@ -26,20 +26,15 @@
 #     along with this program; if not, write to the Free Software Foundation,
 #     Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 #
+use Test::More;
 use Date::Convert::French_Rev;
 
-my $n = 1;
-
 sub r2g {
-  my $n      = shift;
   my $date_g = shift;
-  my $date = new Date::Convert::French_Rev @_;
-  convert Date::Convert::Gregorian $date;
+  my $date = Date::Convert::French_Rev->new(@_);
+  Date::Convert::Gregorian->convert($date);
   my $date_resul = $date->date_string;
-  if ($date_g eq $date_resul)
-    { print "ok $n\n" }
-  else
-    { print "not ok $n : expected $date_g, got $date_resul\n" }
+  is($date_g, $date_resul,"expected $date_g, got $date_resul");
 }
 
 
@@ -82,7 +77,7 @@ sub r2g {
           ["2192 Sep 22", 401,  1,  1],
           );
 
-printf "1..%d\n", scalar @tests;
+plan(tests => scalar @tests);
 
-foreach (@tests) { r2g $n++, @$_ }
+foreach (@tests) { r2g @$_ }
 
