@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Example of Date::Convert::French_Rev script to print a French Revolutionary calendar
@@ -6,11 +6,12 @@
 #
 #     See the license in the embedded documentation below.
 #
-use Date::Convert::French_Rev;
-use Getopt::Long;
-use Roman;
 use strict;
+use warnings;
 use FindBin;
+use Getopt::Long;
+use Date::Convert::French_Rev;
+use Roman;
 
 my $lang = 'en';
 my $pict = undef;
@@ -42,7 +43,10 @@ sub prt_cal {
   # HTML header
   print <<"EOT";
 <html>
-<head><title>$labels{calendar}</title></head>
+<head>
+<title>$labels{calendar}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 <body>
 EOT
   print qq(<p align='center'><img src='$pict'>\n) if $pict;
