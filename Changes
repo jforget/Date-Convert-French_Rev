@@ -2,8 +2,9 @@
 Revision history for Perl extension Date::Convert::French_Rev.
 
 0.06  ???
-        - kwalitee issues and CPANTS game: license
+        - kwalitee issues and CPANTS game: license, style
         - use UTF-8 instead of ISO-8859-1, use spaces instead of tabs
+        - more tests, more modern tests
 
 0.05  Nonidi 9 Floréal CCXI, jour de la jacinthe (Monday 2003-04-28)
         - last version compatible with Date::Convert, next one will

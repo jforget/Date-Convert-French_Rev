@@ -398,20 +398,25 @@ Date::Convert::French_Rev - Convert from / to French Revolutionary Calendar
 
 Converting from Gregorian (or other) to Revolutionary
 
-    $date=new Date::Convert::Gregorian(1799, 11, 9);
-    convert Date::Convert::French_Rev $date;
-    print $date->date_string, "\n";
-    print $date->date_string($format), "\n";
+    $date = Date::Convert::Gregorian->new(1799, 11, 9); # 9th November 1799...
+    Date::Convert::French_Rev->convert($date);
+    print $date->date_string, "\n";                     # ... is "18 Brumaire VIII"
+    my $format = "%A %d %B %EY %Ej";
+    print $date->date_string($format), "\n";            # ... or "Octidi 18 Brumaire VIII jour de la dentelaire"
 
 Converting from Revolutionary to Gregorian (or other)
 
-    $date=new Date::Convert::French_Rev(8, 2, 18);
-    convert Date::Convert::Gregorian $date;
-    print $date->date_string, "\n";
+    $date = Date::Convert::French_Rev->new(8, 2, 18);   # 18 Brumaire VIII...
+    Date::Convert::Gregorian->convert($date);
+    print $date->date_string, "\n";                     # ... is "1799 Nov 9"
 
 =head1 REQUIRES
 
 Date::Convert, Roman
+
+A Unicode-friendly version of Perl,  that is, more or less, Perl 5.8.8
+or greater.  Yet,  if you do not use  the C<date_string> accessor, you
+can use a lower version of Perl.
 
 =head1 EXPORTS
 
@@ -419,23 +424,23 @@ Nothing.
 
 =head1 DESCRIPTION
 
-This module is obsolete. It is replaced by a module compatible with DateTime.pm:
-  DateTime::Calendar::FrenchRevolutionary
-
 The following methods are available:
 
 =over 4
 
 =item new
 
-Create a new Revolutinary date object with the specified start
-parameters, ie. C<$date = new Date::Convert::French_Rev(8, 2, 18)> for
-18 Brumaire VIII.
+Create a new Revolutionary date object with the specified year, month,
+day parameters, e.g.
+
+  $date = Date::Convert::French_Rev->new(8, 2, 18)
+
+for 18 Brumaire VIII.
 
 =item date
 
-Extract a list consisting of the year, the month and the day. The end-of-year 
-additional days are assigned to the virtual 13th month.
+Extract a  list consisting  of the  year, the month  and the  day. The
+end-of-year additional days are assigned to the virtual 13th month.
 
 =item year
 
@@ -443,8 +448,8 @@ Return just the year element of date.
 
 =item month
 
-Return the month element of date, or 13 if the date is an additional day at the
-end of the year.
+Return the month  element of date, or 13 if the  date is an additional
+day at the end of the year.
 
 =item day
 
@@ -460,13 +465,13 @@ Change the date to a new format.
 
 =item date_string
 
-Return the date in a pretty format. You can give an string parameter to adjust
-the date format to your preferences.
+Return the date  in a pretty format. You can  give an string parameter
+to adjust the date format to your preferences.
 
 =back
 
-The format parameter to C<date_string> is a string consisting of any
-characters (letters, digits, whitespace, other) with %-prefixed field
+The format parameter  to C<date_string> is a string  consisting of any
+characters (letters, digits,  whitespace, other) with %-prefixed field
 descriptors, inspired from the Unix standard C<date(1)> command.
 
 The following field descriptors are recognized:
@@ -479,10 +484,11 @@ year - 00 to 99
 
 =item %Y, %G, %L
 
-year - 0001 to 9999. There is no difference between these three variants. This is
-because in the Revolutionary calendar, the beginning of a year is always aligned
-with the beginning of a décade, while in the Gregorian calendar, the beginning
-of a year is usually not aligned with the beginning of a week.
+year  - 0001  to  9999. There  is  no difference  between these  three
+variants. This is because in the Revolutionary calendar, the beginning
+of a year  is always aligned with the beginning of  a décade, while in
+the Gregorian calendar, the beginning of a year is usually not aligned
+with the beginning of a week.
 
 =item %EY, %Ey
 
@@ -494,12 +500,13 @@ month of year - 01 to 12, or 13 for the end-of-year additional days.
 
 =item %f
 
-month of year - " 1" to "12", or "13" for the end-of-year additional days.
+month of year  - " 1" to "12", or "13"  for the end-of-year additional
+days.
 
 =item %b, %h
 
-month abbreviation - Ven to Fru, or S-C for the end-of-year additional days
-(called I<Sans-Culottides>).
+month abbreviation - Ven to Fru, or S-C for the end-of-year additional
+days (called I<Sans-Culottides>).
 
 =item %B
 
@@ -551,7 +558,7 @@ replaced by a newline, tab, percent and plus character respectively
 
 =back
 
-The time-related field specifiers are irrelevant. Therefore, they are
+The time-related field specifiers  are irrelevant. Therefore, they are
 copied "as is" into the result string. These fields are:
 
   %h, %k, %i, %I, %p, %M, %S, %s, %o, %Z, %z
@@ -560,22 +567,7 @@ Neither are the composite field specifiers supported:
 
   %c, %C, %u, %g, %D, %x, %l, %r, %R, %T, %X, %V, %Q, %q, %P, %F, %J, %K
 
-=for diagnostics
-start description
-
 =head1 DIAGNOSTICS
-
-These   are   the   diagnostics   which  can   be   produced   by
-C<Date::Convert::French_Rev>.  The  explanations can be displayed
-when   the   error   is    produced   if   you   have   installed
-C<diagnostics.pm>, version 1.2. Just  insert one of the following
-lines in your script:
-
-    use diagnostics qw(-m=Date::Convert::French_Rev);
-    use diagnostics qw(-m=Date::Convert::French_Rev -m=perl);
-
-=for diagnostics
-start items
 
 =over 4
 
@@ -606,9 +598,6 @@ If you  ask a negative  (Revolutionary) year, zero  included, the
 module may produce various errors, such as off-by-one conditions.
 
 =back
-
-=for diagnostics
-stop items
 
 =head1 KNOWN BUGS AND CAVEATS
 
@@ -698,6 +687,8 @@ L<http://www.mongueurs.net>.
 date(1), perl(1), Date::DateCalc(3), Date::Convert(3)
 
 calendar/cal-french.el in emacs-21.2 or xemacs 21.1.8
+
+DateTime and DateTime::Calendar::FrenchRevolutionary
 
 =head2 books
 
