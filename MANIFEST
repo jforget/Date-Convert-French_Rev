@@ -23,3 +23,4 @@ t/20_greg2rep.t
 t/30_newyearday.t
 t/40_newyearday.t
 t/50_format.t
+t/80_neg.t

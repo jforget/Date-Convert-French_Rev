@@ -561,7 +561,7 @@ replaced by a newline, tab, percent and plus character respectively
 The time-related field specifiers  are irrelevant. Therefore, they are
 copied "as is" into the result string. These fields are:
 
-  %h, %k, %i, %I, %p, %M, %S, %s, %o, %Z, %z
+  %H, %k, %i, %I, %p, %M, %S, %s, %o, %Z, %z
 
 Neither are the composite field specifiers supported:
 

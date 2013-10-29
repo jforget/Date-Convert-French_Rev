@@ -35,7 +35,7 @@ sub g2r {
   my $date   = Date::Convert::Gregorian->new(@_);
   Date::Convert::French_Rev->convert($date);
   my $date_resul = $date->date_string($format);
-  is($date_r, $date_resul, "expected $date_r, got $date_resul");
+  is($date_resul, $date_r, "expected $date_r, got $date_resul");
 }
 
 my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
@@ -62,6 +62,17 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
              [" 6 (Sextidi), jour de la bagarade", "%w (%A), %Ej", 2001, 9, 12],
              ["Décadi Déc 10", "%A %a %d", 1794, 7, 28],
 	     # almost every specifier
+	     [<<"RES", <<"FMT",     2004,  8, 17],
+a Pri A Primidi b Fru B Fructidor c %c C %C d 01 D %D e  1 f 12 F %F G 0212 g %g
+h Fru H %H i %i I %I j 331 J %J k %k L %K l %l L 0212 m 12 M %M o %o p %p P %P q %q Q %Q r %r R %R
+s %s S %S T %T u %u U %U V %V w  1 W %W x %x X %X y 12 Y 0212 Ey ccxii EY CCXII z %z Z %Z
+Ea Pri EA Primidi Oa Pri OA Primidi E! E!
+RES
+a %a A %A b %b B %B c %c C %C d %d D %D e %e f %f F %F G %G g %g
+h %h H %H i %i I %I j %j J %J k %k K %K l %l L %L m %m M %M o %o p %p P %P q %q Q %Q r %r R %R
+s %s S %S T %T u %u U %U V %V w %w W %W x %x X %X y %y Y %Y Ey %Ey EY %EY z %z Z %Z
+Ea %Ea EA %EA Oa %Oa OA %OA E! %E!
+FMT
              );
 
 my $nb_tests = @tests;

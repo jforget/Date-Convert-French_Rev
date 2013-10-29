@@ -35,7 +35,7 @@ sub g2r {
   my $date = Date::Convert::Gregorian->new(@_);
   Date::Convert::French_Rev->convert($date);
   my $date_resul = $date->date_string($format);
-  is($date_r, $date_resul, "expected $date_r, got $date_resul");
+  is($date_resul, $date_r, "expected $date_r, got $date_resul");
 }
 
 

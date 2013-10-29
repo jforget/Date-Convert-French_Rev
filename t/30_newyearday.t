@@ -34,7 +34,7 @@ sub r2g {
   my $date = Date::Convert::French_Rev->new(@_);
   Date::Convert::Gregorian->convert($date);
   my $date_resul = $date->date_string;
-  is($date_g, $date_resul,"expected $date_g, got $date_resul");
+  is($date_resul, $date_g, "expected $date_g, got $date_resul");
 }
 
 
