@@ -329,7 +329,8 @@ sub field {
   $spec eq '%w'         && do { return sprintf("%2d", $decade_day || 10) };
   $spec eq '%EY'        && do { return Roman $self->year || $self->year };
   $spec eq '%Ey'        && do { return roman $self->year || $self->year };
-  $spec eq '%Ej'        && do
+ ($spec eq '%Ej' || $spec eq '%*')
+                        && do
     {
       my $jj = 30 * $self->month + $self->day - 31; # %j is 1..366, but $jj is 0..365
       my $lb = $DAYS[$jj];
@@ -547,6 +548,10 @@ or a tool.
 =item %EJ
 
 same as %Ej, but significant words are capitalized.
+
+=item %*
+
+same as %Ej.
 
 =item %Oj
 
