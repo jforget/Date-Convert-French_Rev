@@ -327,8 +327,8 @@ sub field {
   $spec eq '%a'         && do { return $DECADE_DAYS_SHORT[$decade_day] };
   $spec eq '%A'         && do { return $DECADE_DAYS[$decade_day] };
   $spec eq '%w'         && do { return sprintf("%2d", $decade_day || 10) };
-  $spec eq '%EY'        && do { return Roman $self->year || $self->year };
-  $spec eq '%Ey'        && do { return roman $self->year || $self->year };
+  $spec eq '%EY'        && do { return $self->year < 4000 ? Roman($self->year) : $self->year };
+  $spec eq '%Ey'        && do { return $self->year < 4000 ? roman($self->year) : $self->year };
  ($spec eq '%Ej' || $spec eq '%*')
                         && do
     {
@@ -364,7 +364,7 @@ sub date_string {
   # some adventurous mind could think that "0" is a valid format, even if false.
   $format = "%e %B %EY" if (! defined $format or $format eq '');
 
-  my $year = roman($self->year); # possibly to trigger the side effect
+  my $year  = $self->year; # possibly to trigger the side effect
   my $month = $self->month;
   $format =~ s/(          # start of $1
                \%         # percent sign
