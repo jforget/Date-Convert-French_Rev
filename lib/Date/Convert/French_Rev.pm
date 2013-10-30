@@ -8,6 +8,7 @@
 package Date::Convert::French_Rev;
 
 use strict;
+use warnings;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 use Date::Convert;
 use Carp;
@@ -24,12 +25,11 @@ $VERSION = '0.06';
 
 use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
-my @ADD_DAYS_SHORT= qw ( Vertu Génie Trav Raison Récomp Révol);
 my @MONTHS = qw(Vendémiaire Brumaire  Frimaire
                 Nivôse      Pluviôse  Ventôse
                 Germinal    Floréal   Prairial
                 Messidor    Thermidor Fructidor);
-push @MONTHS, "jour complémentaire";
+push @MONTHS, "jour complémentaire"; # Incompatible with qw(), because of embedded space
 
 # The day numer 10 is counterintuitively placed in the 0-th element
 # because the modulus operator and the Perl arrays are 0-based.
@@ -186,7 +186,7 @@ sub initialize {
     $$self{'month'} = $month;
     $$self{'day'}   = $day;
 
-    my $is_leap = is_leap Date::Convert::French_Rev $year;
+    my $is_leap = Date::Convert::French_Rev->is_leap($year);
     croak "month $month out of range" if $month > 13 or $month <= 0;
     croak "standard day number $day out of range" if $day <= 0 and $month <= 12;
     croak "standard day number $day out of range" if $day > 30 and $month <= 12;
@@ -214,7 +214,7 @@ sub initialize {
     # now, month into days.
     $absol += 30 * ($month - 1) + $day - 1;
 
-    $$self{absol}=$absol;
+    $$self{absol} = $absol;
 }
 
 sub year {

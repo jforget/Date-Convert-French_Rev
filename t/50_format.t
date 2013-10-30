@@ -52,26 +52,31 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
              ["Qua 14 Germinal CCIX, jour du hêtre", "%a %d %B %EY, %Ej", 2001, 4, 3],
              ["Primidi 11 Vendémiaire ccix, Jour de la Pomme de terre", "%A %d %B %Ey, %EJ", 2000, 10, 2],
              ["Primidi 11 Vendémiaire CCXIX, jour de la pomme de terre", 
-		"%A %d %B %EY, %*", 2010, 10, 2],
+                "%A %d %B %EY, %*", 2010, 10, 2],
              ["Quintidi 25 Vendémiaire CCXIX, jour du bœuf", 
-		"%A %d %B %EY, %*", 2010, 10, 16],
+                "%A %d %B %EY, %*", 2010, 10, 16],
              ["Sextidi 16 Prairial CCXIX, jour de l'œillet", 
-		"%A %d %B %EY, %*", 2011,  6,  4],
+                "%A %d %B %EY, %*", 2011,  6,  4],
              [" 5 jour complémentaire 09, Jour des Récompenses", "%e %B %y, %EJ", 2001, 9, 21],
              ["mois : 02  2, jour 046, jour du chervis", "mois : %m %f, jour %j, %Ej", 2000, 11, 6],
              [" 6 (Sextidi), jour de la bagarade", "%w (%A), %Ej", 2001, 9, 12],
              ["Décadi Déc 10", "%A %a %d", 1794, 7, 28],
-	     # almost every specifier
-	     [<<"RES", <<"FMT",     2004,  8, 17],
+             ["11 Nivôse MMMCCIX",            "", 5001,  1,  1],
+             ["11 Nivôse mmmccix",   "%e %B %Ey", 5001,  1,  1],
+             ["13 Nivôse 4209",               "", 6001,  1,  1],
+             ["13 Nivôse 4209",      "%e %B %Ey", 6001,  1,  1],
+             # almost every specifier
+             [<<"RES", <<"FMT",     2004,  8, 17],
 a Pri A Primidi b Fru B Fructidor c %c C %C d 01 D %D e  1 f 12 F %F G 0212 g %g
 h Fru H %H i %i I %I j 331 J %J k %k K %K l %l L 0212 m 12 M %M o %o p %p P %P q %q Q %Q r %r R %R
 s %s S %S T %T u %u U %U V %V w  1 W %W x %x X %X y 12 Y 0212 Ey ccxii EY CCXII z %z Z %Z
-Ea %Ea EA %EA Oa %Oa OA %OA E! %E!
+Ea %Ea EA %EA Oa %Oa OA %OA E! %E! + \t
+
 RES
 a %a A %A b %b B %B c %c C %C d %d D %D e %e f %f F %F G %G g %g
 h %h H %H i %i I %I j %j J %J k %k K %K l %l L %L m %m M %M o %o p %p P %P q %q Q %Q r %r R %R
 s %s S %S T %T u %u U %U V %V w %w W %W x %x X %X y %y Y %Y Ey %Ey EY %EY z %z Z %Z
-Ea %Ea EA %EA Oa %Oa OA %OA E! %E!
+Ea %Ea EA %EA Oa %Oa OA %OA E! %E! %+ %t%n
 FMT
              );
 
