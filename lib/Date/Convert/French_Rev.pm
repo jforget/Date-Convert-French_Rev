@@ -327,8 +327,8 @@ sub field {
   $spec eq '%a'         && do { return $DECADE_DAYS_SHORT[$decade_day] };
   $spec eq '%A'         && do { return $DECADE_DAYS[$decade_day] };
   $spec eq '%w'         && do { return sprintf("%2d", $decade_day || 10) };
-  $spec eq '%EY'        && do { return Roman $self->year };
-  $spec eq '%Ey'        && do { return roman $self->year };
+  $spec eq '%EY'        && do { return Roman $self->year || $self->year };
+  $spec eq '%Ey'        && do { return roman $self->year || $self->year };
   $spec eq '%Ej'        && do
     {
       my $jj = 30 * $self->month + $self->day - 31; # %j is 1..366, but $jj is 0..365
