@@ -567,6 +567,10 @@ Neither are the composite field specifiers supported:
 
   %c, %C, %u, %g, %D, %x, %l, %r, %R, %T, %X, %V, %Q, %q, %P, %F, %J, %K
 
+If a percent-sequence  is not a valid specifier, it  is copied "as is"
+into the  result string. This  is true especially  for C<%E>-sequences
+and C<%O>-sequences other than those listed above.
+
 =head1 DIAGNOSTICS
 
 =over 4
