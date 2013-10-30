@@ -64,7 +64,7 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
 	     # almost every specifier
 	     [<<"RES", <<"FMT",     2004,  8, 17],
 a Pri A Primidi b Fru B Fructidor c %c C %C d 01 D %D e  1 f 12 F %F G 0212 g %g
-h Fru H %H i %i I %I j 331 J %J k %k L %K l %l L 0212 m 12 M %M o %o p %p P %P q %q Q %Q r %r R %R
+h Fru H %H i %i I %I j 331 J %J k %k K %K l %l L 0212 m 12 M %M o %o p %p P %P q %q Q %Q r %r R %R
 s %s S %S T %T u %u U %U V %V w  1 W %W x %x X %X y 12 Y 0212 Ey ccxii EY CCXII z %z Z %Z
 Ea Pri EA Primidi Oa Pri OA Primidi E! E!
 RES
