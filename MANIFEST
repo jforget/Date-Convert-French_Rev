@@ -4,6 +4,7 @@ LICENSE
 MANIFEST
 Makefile.PL
 README
+TODO
 eg/README
 eg/g2r_table
 eg/labels_en
