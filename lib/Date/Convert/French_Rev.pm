@@ -175,9 +175,7 @@ my @YEARS_BEGINS=    (0, 365, 730, 1096, 1461, 1826, 2191, 2557, 2922, 3287, 365
 sub initialize {
     my $self = shift;
     my ($year, $month, $day) = @_;
-    if (not defined($year) and not defined($month) and not defined($day))
-      { return Date::Convert::initialize }
-    if (not defined($year) or  not defined($month) or  not defined($day))
+    unless (defined($year) and defined($month) and defined($day))
       { croak "Date::Convert::French_Rev::initialize needs more args" }
     confess "These routines don't work well for French_Rev before year 1"
         if $year < 1;
@@ -192,7 +190,7 @@ sub initialize {
     croak "standard day number $day out of range" if $day > 30 and $month <= 12;
     croak "additional day $day out of range" if ($month == 13) and ($day <= 0);
     croak "additional day $day out of range" if ($month == 13) and ($day > 5) and !$is_leap;
-    croak "additional day $day out of range" if ($month == 13) and ($day > 6) and $is_leap;
+    croak "additional day $day out of range" if ($month == 13) and ($day > 6); # implying "and $is_leap" other cases already discarded
 
     $year --;  #get years *before* this year.  Makes math easier.  :)
     # first, convert year into days. . .
