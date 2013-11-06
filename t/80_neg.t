@@ -37,7 +37,7 @@
 use Test::More;
 use Date::Convert::French_Rev;
 
-sub check {
+sub check_cycle {
   my ($y, $m, $d) = @_;
   my $dt  = Date::Convert::Gregorian->new(@_);
   my $date_g1  = $dt->date_string;
@@ -47,10 +47,10 @@ sub check {
   is($date_g1, $date_g2);
 }
 
-@tests = ([1789, 7, 14, 16, 15, 0] # Storming of the Bastille
-	, [1792, 9, 21,  8, 30, 0] # 1 day before the DT-C-FR epoch
-	, [1792, 9, 22,  8, 30, 0] # the DT-C-FR epoch
+@tests = ([1792, 9, 22,  1,  1,  1] # the DT-C-FR epoch
+        , [1792, 9, 21,  0, 13,  5] # 1 day before the DT-C-FR epoch
+        , [1789, 7, 14, -3, 10, 25] # Storming of the Bastille
 );
 plan(tests => scalar @tests);
 
-foreach (@tests) { check @$_ }
+foreach (@tests) { check_cycle @$_ }

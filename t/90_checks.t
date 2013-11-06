@@ -33,7 +33,9 @@ use Test::More;
 use Test::Exception;
 use Date::Convert::French_Rev;
 
-my @tests = ( [ "Month number is zero",          2000,  0,  1 ],
+my @tests = ( [ "Year number is zero",              0,  1,  1 ],
+              [ "Year number is negative",         -2,  1,  1 ],
+              [ "Month number is zero",          2000,  0,  1 ],
               [ "Month number is more than 14",  2000, 14,  1 ],
               [ "Day number is zero",            2000,  1,  0 ],
               [ "Day number is more than 30",    2000,  1, 31 ],

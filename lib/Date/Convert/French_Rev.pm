@@ -177,14 +177,13 @@ sub initialize {
     my ($year, $month, $day) = @_;
     unless (defined($year) and defined($month) and defined($day))
       { croak "Date::Convert::French_Rev::initialize needs more args" }
-    confess "These routines don't work well for French_Rev before year 1"
-        if $year < 1;
     my $absol = REV_BEGINNING;
     $$self{'year'}  = $year;
     $$self{'month'} = $month;
     $$self{'day'}   = $day;
 
     my $is_leap = Date::Convert::French_Rev->is_leap($year);
+    croak "year $year out of range" if $year <= 0;
     croak "month $month out of range" if $month > 13 or $month <= 0;
     croak "standard day number $day out of range" if $day <= 0 and $month <= 12;
     croak "standard day number $day out of range" if $day > 30 and $month <= 12;
@@ -223,41 +222,38 @@ sub year {
     # note:  years and days are initially days *before* today, rather than
     # today's date.  This is because of fenceposts.  :)
     $days =  $$self{absol} - REV_BEGINNING;
-    if ($days < $YEARS_BEGINS[16])
-      {
-        $year = scalar grep { $_ <= $days } @YEARS_BEGINS;
-        $days -= $YEARS_BEGINS[$year - 1];
-        $days++;
-      }
-    else
-      {
-        #$days --;
-        my $x;
-        $x     = int ($days / FOUR_MILLENIA);
-        $year += $x * 4000;
-        $days -= $x * FOUR_MILLENIA;
+    if ($days < $YEARS_BEGINS[16]) {
+      $year = scalar grep { $_ <= $days } @YEARS_BEGINS;
+      $days -= $YEARS_BEGINS[$year - 1];
+      $days++;
+    }
+    else {
+      my $x;
+      $x     = int ($days / FOUR_MILLENIA);
+      $year += $x * 4000;
+      $days -= $x * FOUR_MILLENIA;
 
-        $x     = int ($days / FOUR_CENTURIES);
-        $year += $x * 400;
-        $days -= $x * FOUR_CENTURIES;
+      $x     = int ($days / FOUR_CENTURIES);
+      $year += $x * 400;
+      $days -= $x * FOUR_CENTURIES;
 
-        $x     = int ($days / CENTURY);
-        $x     = 3 if $x == 4; # last day of the 400-year period
-        $year += $x * 100;
-        $days -= $x * CENTURY;
+      $x     = int ($days / CENTURY);
+      $x     = 3 if $x == 4; # last day of the 400-year period
+      $year += $x * 100;
+      $days -= $x * CENTURY;
 
-        $x     = int ($days / FOUR_YEARS);
-        $year += $x * 4;
-        $days -= $x * FOUR_YEARS;
+      $x     = int ($days / FOUR_YEARS);
+      $year += $x * 4;
+      $days -= $x * FOUR_YEARS;
 
-        $x     = int ($days / NORMAL_YEAR);
-        $x     = 3 if $x == 4; # last day of the 4-year period
-        $year += $x;
-        $days -= $x * NORMAL_YEAR;
+      $x     = int ($days / NORMAL_YEAR);
+      $x     = 3 if $x == 4; # last day of the 4-year period
+      $year += $x;
+      $days -= $x * NORMAL_YEAR;
 
-        ++$year; # because of 0-based mathematics vs 1-based chronology
-        ++$days;
-      }
+      ++$year; # because of 0-based mathematics vs 1-based chronology
+      ++$days;
+    }
     $$self{year}           = $year;
     $$self{days_into_year} = $days;
     return $year;
@@ -289,8 +285,10 @@ sub date {
 }
 
 sub is_leap {
-    my $self = shift;
-    my $year = shift || $self->year; # so is_leap can be static or method
+    my ($self, $year) = @_;
+    if (@_ == 1) {
+      $year = $self->year; # so is_leap can be static or method
+    }
 
     # Autumn equinox from I to XIX
     return 1 if ($year == 3) or ($year == 7) or ($year == 11) or ($year == 15);
@@ -578,6 +576,11 @@ and C<%O>-sequences other than those listed above.
 
 =over 4
 
+=item year %s out of range
+
+The module does  not deal with year prior to the  epoch. The year must
+be "1" or greater.
+
 =item month %s out of range
 
 The  French Revolutionary  calendar has  12 months,  plus 5  or 6
@@ -598,11 +601,6 @@ C<Date::Convert::French_Rev::initialize>.
 =item standard day number %s out of range
 
 The day number for any normal month is in the 1-30 range.
-
-=item These routines don't work well for French_Rev before year 1
-
-If you  ask a negative  (Revolutionary) year, zero  included, the
-module may produce various errors, such as off-by-one conditions.
 
 =back
 
