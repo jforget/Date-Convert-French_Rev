@@ -1,13 +1,13 @@
-Date::Convert::French_Rev - Jean Forget <J-FORGET@wanadoo.fr>
+Date::Convert::French_Rev - Jean Forget <JFORGET@cpan.org>
 
 Date conversion using the French Revolutionary calendar.
 
 WHY A NEW VERSION AFTER TEN YEARS?
 
-I released  the last version  of this module  the same day  I released
-DateTime::Calendar::FrenchRevolutionary version  0.01. It was intended
-to  be the  final version  of Date::Convert::French_Rev.  So why  do I
-release another version ten years later?
+I  released the  last version  of this  module (0.05)  the same  day I
+released DateTime::Calendar::FrenchRevolutionary  version 0.01. It was
+intended to be the final version of Date::Convert::French_Rev.  So why
+do I release another version ten years later?
 
 Between  2003 and  2013, the  world has  moved on  and CPAN  has moved
 on.  In  2003, UTF-8  was  a promising  technic,  but  not yet  widely
@@ -35,13 +35,14 @@ See the alternate install procedure below.
 
 REQUIREMENTS
 
+Roman, by Alexandr Ciornii (CHORNY)
 Date::Convert, by Mordechai Abzug (MORTY)
-Roman, by OZAWA Sakuro (OZAWA)
+Test::Exception, by Adrian Howard (ADIE)
 
 INSTALL
 
-First intall Roman.pm and Date::Convert.pm, and then install the
-normal way:
+First intall Test::Exception,  Roman.pm and Date::Convert.pm, and then
+install the normal way:
 
 perl Makefile.PL
 make
@@ -51,6 +52,8 @@ make install
 Note: if "make  test" give you a "dubious"  result, one possibility is
 that you  have forgotten to install  Roman.pm. I know,  it happened to
 me!
+
+Or use you favorite CPAN client: CPAN.pm, cpanp, cpanm, dzil, whatever.
 
 ALTERNATE INSTALL
 
