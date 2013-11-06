@@ -21,6 +21,7 @@ eg/result/r2g_fr.html
 t/00_loading.t
 t/10_rep2greg.t
 t/20_greg2rep.t
+t/22_leapyear.t
 t/30_newyearday.t
 t/40_newyearday.t
 t/50_format.t
