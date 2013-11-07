@@ -450,7 +450,7 @@ day at the end of the year.
 
 =item day
 
-Just like year and month.
+Return just the day number element of date.
 
 =item is_leap
 
@@ -477,7 +477,7 @@ The following field descriptors are recognized:
 
 =item %y
 
-year - 00 to 99
+2-digit year - 00 to 99
 
 =item %Y, %G, %L
 
@@ -493,53 +493,61 @@ year as a Roman number - I to MMM
 
 =item %m
 
-month of year - 01 to 12, or 13 for the end-of-year additional days.
+month of year  - 01 to 12, or 13 for  the end-of-year additional days.
+The number  is formatted as  a 2-char string,  with a leading  zero if
+necessary.
 
 =item %f
 
 month of year  - " 1" to "12", or "13"  for the end-of-year additional
-days.
+days.   The number is  formatted as  a 2-char  string, with  a leading
+space if necessary.
 
 =item %b, %h
 
 month abbreviation - Ven to Fru, or S-C for the end-of-year additional
-days (called I<Sans-Culottides>).
+days (called I<Sans-Culottides>). A 3-char string.
 
 =item %B
 
 month full name - Vendémiaire to Fructidor, or "jour complémentaire"
-for the end-of-year additional days.
+for the end-of-year additional days. A variable length string.
 
 =item %d
 
-day of month - 01 to 30
+day of month - 01 to 30.   The number is formatted as a 2-char string,
+with a leading zero if necessary.
 
 =item %e
 
-day of month - " 1" to "30"
+day of  month - "  1" to  "30".  The number  is formatted as  a 2-char
+string, with a leading space if necessary.
 
 =item %A
 
-day of décade - "Primidi" to "Décadi".
+day of décade - "Primidi" to "Décadi". A variable length string.
 
 =item %a
 
-abbreviated day  of décade - "Pri"  to "Déc".  Beware:  do not confuse
-Sep, Oct and Déc with Gregorian calendar months
+abbreviated day of décade -  "Pri" to "Déc".  A 3-char string. Beware:
+do not confuse Sep, Oct and Déc with Gregorian calendar months
 
 =item %w
 
-day of décade - " 1" to "10" (" 1" for Primidi, " 2" for Duodi, etc)
+day  of décade -  " 1"  to "10"  (" 1"  for Primidi,  " 2"  for Duodi,
+etc). The number is formatted as a 2-char string, with a leading space
+if necessary.
 
 =item %j
 
-day of the year - "001" to "366".
+day of the year - "001" to "366". A 3-char string, with leading zeroes
+if necessary.
 
 =item %Ej
 
 full name of the day of the year. Instead of assigning a saint to each
 day, the creators of the calendar decided to assign a plant, an animal
-or a tool.
+or a tool. A variable-length string.
 
 =item %EJ
 
@@ -555,7 +563,7 @@ simple name of the day of the year. Same as %Ej, without the prefix.
 
 =item %n, %t, %%, %+
 
-replaced by a newline, tab, percent and plus character respectively
+replaced by a newline, tab, percent and plus character respectively.
 
 =back
 
@@ -607,11 +615,6 @@ The day number for any normal month is in the 1-30 range.
 =head1 KNOWN BUGS AND CAVEATS
 
 Not many bugs, but many caveats.
-
-Some day names correspond to  little known plants. Therefore, I am not
-sure if they  use the masculine gender or the  feminine gender. I have
-found some  in various dictionaries, but  there still remain  a few of
-them.  Note: they are tagged with a 4, 5 or 6 code.
 
 My sources  disagree about the 4th  additional day. One  says "jour de
 l'opinion", the other says "jour de la raison".
@@ -678,12 +681,9 @@ Carlyle proposes these translations for the month names:
 
 =head1 AUTHOR
 
-Jean Forget <J-FORGET@wanadoo.fr>
+Jean Forget <JFORGET@cpan.org>
 
 based on Mordechai T. Abzug's work <morty@umbc.edu>
-
-The development of this module is hosted by I<Les Mongueurs de Perl>,
-L<http://www.mongueurs.net>.
 
 =head1 SEE ALSO
 
@@ -691,7 +691,7 @@ L<http://www.mongueurs.net>.
 
 date(1), perl(1), Date::DateCalc(3), Date::Convert(3)
 
-calendar/cal-french.el in emacs-21.2 or xemacs 21.1.8
+calendar/cal-french.el in emacs or xemacs
 
 DateTime and DateTime::Calendar::FrenchRevolutionary
 
@@ -708,6 +708,13 @@ The French Revolution, Thomas Carlyle, Oxford University Press
 =head2 Internet
 
 http://www.faqs.org/faqs/calendars/faq/part3/
+
+http://h2g2.com/approved_entry/A2903636
+
+http://en.wikipedia.org/wiki/French_Republican_Calendar
+
+http://prairial.free.fr/calendrier/calendrier.php?lien=sommairefr
+(in French)
 
 =head1 LICENSE
 
