@@ -591,24 +591,23 @@ be "1" or greater.
 
 =item month %s out of range
 
-The  French Revolutionary  calendar has  12 months,  plus 5  or 6
-additional  days that  do not  belong to  a month.  So  the month
-number  must be  in the  1-12 range  for normal  days, or  13 for
-additional days
+The  French  Revolutionary  calendar  has  12  months,  plus  5  or  6
+additional days  that do not belong  to a month.  So  the month number
+must be in the 1-12 range for normal days, or 13 for additional days
+
+=item standard day number %s out of range
+
+The day number for any normal month is in the 1-30 range.
 
 =item additional day %s out of range
 
-The day number for the end-of-year additional days is a number in
-the 1-5 range (or the 1-6 range for leap years).
+The day number for the end-of-year  additional days is a number in the
+1-5 range (or the 1-6 range for leap years).
 
 =item Date::Convert::French_Rev::initialize needs more args
 
 You  must provide  a year,  a month  number and  a day  number to
 C<Date::Convert::French_Rev::initialize>.
-
-=item standard day number %s out of range
-
-The day number for any normal month is in the 1-30 range.
 
 =back
 
@@ -631,6 +630,11 @@ I  have checked the  manpage for  C<date(1)> in  two flavors  of Unix:
 Linux and AIX. In the best case, the extended field descriptors C<%Ex>
 and C<%Oy> are poorly documented, but usually they are not documented.
 
+The C<Test::Exception>  module is required for the  build process, not
+for  the   regular  use  of   C<Date::Convert::French_Rev>.  But  with
+C<ExtUtils::MakeMaker>,   I   do   not   know  how   to   generate   a
+C<build_requires> entry in F<META.yml>.
+
 =head1 HISTORICAL NOTES
 
 The Revolutionary calendar was in  use in France from 24 November 1793
@@ -651,33 +655,18 @@ leap year rule similar to the Gregorian calendar rule.
 In his book  I<The French Revolution>, the 19th  century writer Thomas
 Carlyle proposes these translations for the month names:
 
-=over 4
-
-=item Vendémiaire -> Vintagearious
-
-=item Brumaire -> Fogarious
-
-=item Frimaire -> Frostarious
-
-=item Nivôse -> Snowous
-
-=item Pluviôse -> Rainous
-
-=item Ventôse -> Windous
-
-=item Germinal -> Buddal
-
-=item Floréal -> Floweral
-
-=item Prairial -> Meadowal
-
-=item Messidor -> Reapidor
-
-=item Thermidor -> Heatidor
-
-=item Fructidor -> Fruitidor
-
-=back
+  Vendémiaire -> Vintagearious
+  Brumaire    -> Fogarious
+  Frimaire    -> Frostarious
+  Nivôse      -> Snowous
+  Pluviôse    -> Rainous
+  Ventôse     -> Windous
+  Germinal    -> Buddal
+  Floréal     -> Floweral
+  Prairial    -> Meadowal
+  Messidor    -> Reapidor
+  Thermidor   -> Heatidor
+  Fructidor   -> Fruitidor
 
 =head1 AUTHOR
 
@@ -689,11 +678,11 @@ based on Mordechai T. Abzug's work <morty@umbc.edu>
 
 =head2 Software
 
-date(1), perl(1), Date::DateCalc(3), Date::Convert(3)
+date(1), perl(1), L<Date::Convert>
 
 calendar/cal-french.el in emacs or xemacs
 
-DateTime and DateTime::Calendar::FrenchRevolutionary
+L<DateTime> and L<DateTime::Calendar::FrenchRevolutionary>
 
 =head2 books
 
@@ -707,13 +696,13 @@ The French Revolution, Thomas Carlyle, Oxford University Press
 
 =head2 Internet
 
-http://www.faqs.org/faqs/calendars/faq/part3/
+L<http://www.faqs.org/faqs/calendars/faq/part3/>
 
-http://h2g2.com/approved_entry/A2903636
+L<http://h2g2.com/approved_entry/A2903636>
 
-http://en.wikipedia.org/wiki/French_Republican_Calendar
+L<http://en.wikipedia.org/wiki/French_Republican_Calendar>
 
-http://prairial.free.fr/calendrier/calendrier.php?lien=sommairefr
+L<http://prairial.free.fr/calendrier/calendrier.php?lien=sommairefr>
 (in French)
 
 =head1 LICENSE
