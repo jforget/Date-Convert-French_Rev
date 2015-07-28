@@ -1,7 +1,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Perl Date::Convert extension to convert dates from/to the French Revolutionary calendar
-#     Copyright (C) 2001-2003, 2013 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -719,7 +719,7 @@ L<http://prairial.free.fr/calendrier/calendrier.php?lien=sommairefr>
 
 =head1 LICENSE
 
-Copyright  (c)  2001,  2002,  2003,  2013  Jean  Forget.   All  rights
+Copyright (c)  2001, 2002, 2003,  2013, 2015 Jean Forget.   All rights
 reserved.  This program is free software.  You can distribute, modify,
 and otherwise mangle Date::Convert::French_Rev under the same terms as
 Perl 5.16.3: GNU  Public License version 1 or  later and Perl Artistic
