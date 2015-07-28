@@ -173,6 +173,12 @@ use constant FOUR_MILLENIA  => 10 * FOUR_CENTURIES - 1; # ...except every four m
 my @YEARS_BEGINS=    (0, 365, 730, 1096, 1461, 1826, 2191, 2557, 2922, 3287, 3652,
                    4018, 4383, 4748, 5113, 5479, 5844);
 
+# This method shoudl be in the master class, but for the moment, it is only available here
+sub change_to {
+  my ($self, $new_cal) = @_;
+  $new_cal->convert($self);
+}
+
 sub initialize {
     my $self = shift;
     my ($year, $month, $day) = @_;
@@ -406,6 +412,11 @@ Converting from Revolutionary to Gregorian (or other)
 
     $date = Date::Convert::French_Rev->new(8, 2, 18);   # 18 Brumaire VIII...
     Date::Convert::Gregorian->convert($date);
+
+Alternate way of converting from Revolutionary to Gregorian (or other)
+
+    $date = Date::Convert::French_Rev->new(8, 2, 18);   # 18 Brumaire VIII...
+    $date->change_to("Date::Convert::Gregorian");
     print $date->date_string, "\n";                     # ... is "1799 Nov 9"
 
 =head1 REQUIRES
