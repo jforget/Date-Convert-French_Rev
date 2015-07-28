@@ -28,6 +28,6 @@ t/22_leapyear.t
 t/30_newyearday.t
 t/40_newyearday.t
 t/50_format.t
-t/72-utf8.t
+t/72_utf8.t
 t/80_neg.t
 t/90_checks.t
