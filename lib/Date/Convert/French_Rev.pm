@@ -7,6 +7,7 @@
 #
 package Date::Convert::French_Rev;
 
+use utf8;
 use strict;
 use warnings;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);

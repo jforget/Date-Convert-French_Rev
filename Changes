@@ -5,6 +5,7 @@ Revision history for Perl extension Date::Convert::French_Rev.
         - fix prerequisite: Date::Convert 0.16 is fine, 0.14 is not (RT ticket 90470)
         - test file to check the parameter checks (mistakenly not included in 0.06)
         - a few documentation fixes
+        - fix the mojibake bug (similar to RT ticket 100311 for DT::C::FR)
 
 0.06  Octidi 18 Brumaire CCXXII, jour de la dentelaire (Friday 2013-11-08, also
       the 214th anniversary of Bonaparte's coup agains the Directorate)
