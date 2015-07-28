@@ -332,7 +332,7 @@ sub field {
       my $jj = 30 * $self->month + $self->day - 31; # %j is 1..366, but $jj is 0..365
       my $lb = $DAYS[$jj];
       $lb =~ s/_/ /g;
-      $lb =~ s/^(\d)/$PREFIXES[$1 % 4]/;
+      $lb =~ s/^(\d)/$PREFIXES[$1]/;
       return $lb;
     };
   $spec eq '%EJ'  && do
@@ -341,7 +341,7 @@ sub field {
       my $lb = $DAYS[$jj];
       $lb =~ s/_/ /g;
       # Using a capitalized prefix, and capitalizing the first letter
-      $lb =~ s/^(\d)(.)/\u$PREFIXES[$1 % 4]\u$2/;
+      $lb =~ s/^(\d)(.)/\u$PREFIXES[$1]\u$2/;
       return $lb;
     };
   $spec eq '%Oj'  && do
