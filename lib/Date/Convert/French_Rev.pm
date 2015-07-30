@@ -412,6 +412,7 @@ Converting from Revolutionary to Gregorian (or other)
 
     $date = Date::Convert::French_Rev->new(8, 2, 18);   # 18 Brumaire VIII...
     Date::Convert::Gregorian->convert($date);
+    print $date->date_string, "\n";                     # ... is "1799 Nov 9"
 
 Alternate way of converting from Revolutionary to Gregorian (or other)
 
@@ -470,7 +471,16 @@ Boolean.
 
 =item convert
 
-Change the date to a new format.
+Change the date to a new format. The invocant is the class name of the
+destination calendar, the parameter is the C<Date::Convert::>I<whatever>
+object to convert.
+
+=item change_to
+
+Change the date to a new format. The invocant is the
+C<Date::Convert::>I<whatever> object to convert, the parameter is the
+class name of the destination calendar. For the moment, this method is
+available only for C<Date::Convert::French_Rev> invocant objects.
 
 =item date_string
 
