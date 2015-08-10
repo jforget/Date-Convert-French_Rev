@@ -42,19 +42,19 @@ sub check_Julian {
 
   my $d2     = Date::Convert::French_Rev->new($fy, $fm, $fd);
   Date::Convert::Julian->convert($d2);
-  my $date_resul = $d2->date_string;
+  $date_resul = $d2->date_string;
   ok($d2->year eq $jy && $d2->month eq $jm && $d2->day eq $jd, "expected $string, got $date_resul" );
 
   $string   = Date::Convert::French_Rev->new($fy, $fm, $fd)->date_string;
 
   #my $d3     = Date::Convert::Julian->new($fy, $fm, $fd);
   #$d3->change_to("Date::Convert::French_Rev");
-  #my $date_resul = $d3->date_string;
+  #$date_resul = $d3->date_string;
   #ok($d3->year eq $fy && $d3->month eq $fm && $d3->day eq $fd, "expected $string, got $date_resul" );
 
   my $d4     = Date::Convert::Julian->new($jy, $jm, $jd);
   Date::Convert::French_Rev->convert($d4);
-  my $date_resul = $d4->date_string;
+  $date_resul = $d4->date_string;
   ok($d4->year eq $fy && $d4->month eq $fm && $d4->day eq $fd, "expected $string, got $date_resul" );
 }
 
@@ -70,19 +70,19 @@ sub check_Hebrew {
 
   my $d2     = Date::Convert::French_Rev->new($fy, $fm, $fd);
   Date::Convert::Hebrew->convert($d2);
-  my $date_resul = $d2->date_string;
+  $date_resul = $d2->date_string;
   ok($d2->year eq $jy && $d2->month eq $jm && $d2->day eq $jd, "expected $string, got $date_resul" );
 
   $string   = Date::Convert::French_Rev->new($fy, $fm, $fd)->date_string;
 
   #my $d3     = Date::Convert::Hebrew->new($fy, $fm, $fd);
   #$d3->change_to("Date::Convert::French_Rev");
-  #my $date_resul = $d3->date_string;
+  #$date_resul = $d3->date_string;
   #ok($d3->year eq $fy && $d3->month eq $fm && $d3->day eq $fd, "expected $string, got $date_resul" );
 
   my $d4     = Date::Convert::Hebrew->new($jy, $jm, $jd);
   Date::Convert::French_Rev->convert($d4);
-  my $date_resul = $d4->date_string;
+  $date_resul = $d4->date_string;
   ok($d4->year eq $fy && $d4->month eq $fm && $d4->day eq $fd, "expected $string, got $date_resul" );
 }
 
