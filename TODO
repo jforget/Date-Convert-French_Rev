@@ -16,3 +16,7 @@ was 103.33 (core kwalitee 83.33). Fails include:
 The 0.06 version aims to remove all these issues except for the Fedora
 issues and  for being a prerequisite.   But if some  issues remains or
 appears, the 0.07 issue will remove them.
+
+Well, when releasing version 0.07,  I did not check the META.json file
+and the  prereqs were missing.  So I had  to release version  0.08 and
+check the prereqs are there.
