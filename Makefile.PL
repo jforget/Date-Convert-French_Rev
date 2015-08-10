@@ -28,26 +28,50 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-      'NAME'	     => 'Date::Convert::French_Rev'
+      'NAME'         => 'Date::Convert::French_Rev'
    ,  'VERSION_FROM' => 'lib/Date/Convert/French_Rev.pm'
    ,  'PREREQ_PM'    => {   Roman => 0
-		          , Date::Convert   => '0.16'
-		          , Test::Exception => 0 }
+                          , Date::Convert   => '0.16'
+                          , Test::Exception => 0 }
    ,  'ABSTRACT'     => 'Date conversions using the French Revolutionary calendar'
    ,  'AUTHOR'       => 'Jean Forget <JFORGET@cpan.org>'
-   ,  'LICENSE'	     => 'perl'
+   ,  'LICENSE'      => 'perl'
    ,  'MIN_PERL_VERSION' => '5.8.8'
    ,  'BUILD_REQUIRES'   => { 'Test::More'         => '0',        # should be 'TEST_REQUIRES', except that ExtUtils::MakeMaker 6.5705 does not accept it
                         'ExtUtils::MakeMaker' => '6.57_02',
                            },
    , META_MERGE       => {
+       'meta-spec' => { version => 2 },
+       'prereqs' => {
+          'build' => {
+             'requires' => {
+                'ExtUtils::MakeMaker' => '0',
+             }
+          },
+          'configure' => {
+             'requires' => {
+                'ExtUtils::MakeMaker' => '0',
+             }
+          },
+          'runtime' => {
+             'requires' => {
+                'Date::Convert'   => '0.16',
+                'Roman'           => '0',
+                'perl'            => '5.008008',
+             }
+          },
+          'test' => {
+             'requires' => {
+                'Test::Exception' => '0',
+             }
+          },
+       },
        provides       => {
            'Date::Convert::French_Rev' => {
                 file => 'lib/Date/Convert/French_Rev.pm',
                 version => '0.08',
            },
        },
-       'meta-spec' => { version => 2 },
        resources => {
            repository => {
                type => 'git',

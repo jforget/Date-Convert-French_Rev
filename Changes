@@ -2,6 +2,10 @@
 Revision history for Perl extension Date::Convert::French_Rev.
 
 0.08  ???
+        - fix prerequisite: Date::Convert 0.16 is fine, 0.14 is not.
+          Actually, RT ticket 90470 was prematurely and erroneously declared
+          as "fixed".
+        - improve the documentation of method "change_to".
 
 0.07  Décadi 10 Thermidor CCXXIII, jour de l'arrosoir (Tuesday 2015-07-28, also
       the 221st anniversary of Robespierre's death)
