@@ -175,6 +175,8 @@ my @YEARS_BEGINS=    (0, 365, 730, 1096, 1461, 1826, 2191, 2557, 2922, 3287, 365
 
 # This method shoudl be in the master class, but for the moment, it is only available here
 sub change_to {
+  croak "Need to specify the new calendar"
+    if @_ <= 1;
   my ($self, $new_cal) = @_;
   $new_cal->convert($self);
 }

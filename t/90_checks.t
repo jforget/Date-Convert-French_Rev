@@ -50,10 +50,11 @@ my @tests = ( [ "Year number is zero",              0,  1,  1 ],
               [ "Incomplete parameters",                             undef,  1,    1 ],
 );
 
-plan(tests => scalar @tests);
+plan(tests => 1 + scalar @tests);
 
 for (@tests) {
   my ($msg, @args) = @$_;
   dies_ok { Date::Convert::French_Rev->new(@args) } $msg;
 }
-
+my $d1 = Date::Convert::French_Rev->new(1, 2, 3);
+dies_ok { $d1->change_to() } "One argument required for 'change_to'";
