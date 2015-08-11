@@ -69,7 +69,7 @@ WriteMakefile(
        provides       => {
            'Date::Convert::French_Rev' => {
                 file => 'lib/Date/Convert/French_Rev.pm',
-                version => '0.08',
+                version => '0.09',
            },
        },
        resources => {
