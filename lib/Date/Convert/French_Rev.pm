@@ -48,10 +48,10 @@ my @DAYS = (
 # Vendémiaire
         qw(
        0raisin           0safran           1châtaigne        1colchique        0cheval
-       1balsamine        1carotte          2amarante         0panais           1cuve
+       1balsamine        1carotte          2amaranthe        0panais           1cuve
        1pomme_de_terre   2immortelle       0potiron          0réséda           2âne
-       1belle_de_nuit    1citrouille       0sarrasin         0tournesol        0pressoir
-       0chanvre          1pêche            0navet            2amaryllis        0bœuf
+       1belle-de-nuit    1citrouille       0sarrasin         0tournesol        0pressoir
+       0chanvre          1pêche            0navet            2amarillis        0bœuf
        2aubergine        0piment           1tomate           2orge             0tonneau
         ),
 # Brumaire
@@ -61,7 +61,7 @@ my @DAYS = (
        0salsifis         1macre            0topinambour      2endive           0dindon
        0chervis          0cresson          1dentelaire       1grenade          1herse
        1bacchante        2azerole          1garance          2orange           0faisan
-       1pistache         0macjon           0coing            0cormier          0rouleau
+       1pistache         0macjonc          0coing            0cormier          0rouleau
         ),
 # Frimaire
         qw(
@@ -84,7 +84,7 @@ my @DAYS = (
 # Pluviôse
         qw(
        1lauréole         1mousse           0fragon           0perce-neige      0taureau
-       0laurier-thym     2amadouvier       0mézéréon         0peuplier         1cognée
+       0laurier-thym     2amadouvier       0mézéréon         0peuplier         1coignée
        2ellébore         0brocoli          0laurier          2avelinier        1vache
        0buis             0lichen           2if               1pulmonaire       1serpette
        0thlaspi          0thymelé          0chiendent        1traînasse        0lièvre
@@ -93,9 +93,9 @@ my @DAYS = (
 # Ventôse
         qw(
        0tussilage        0cornouiller      0violier          0troène           0bouc
-       2asaret           2alaterne         1violette         0marsault         1bêche
+       2asaret           2alaterne         1violette         0marceau          1bêche
        0narcisse         2orme             1fumeterre        0vélar            1chèvre
-       2épinard          0doronic          0mouron           0cerfeuil         0cordeau
+       3épinards         0doronic          0mouron           0cerfeuil         0cordeau
        1mandragore       0persil           0cochléaria       1pâquerette       0thon
        0pissenlit        1sylvie           0capillaire       0frêne            0plantoir
         ),
@@ -111,19 +111,19 @@ my @DAYS = (
 # Floréal
         qw(
        1rose             0chêne            1fougère          2aubépine         0rossignol
-       2ancolie          0muguet           0champignon       1jacinthe         0rateau
+       2ancolie          0muguet           0champignon       1hyacinthe        0râteau
        1rhubarbe         0sainfoin         0bâton-d'or       0chamérisier      0ver_à_soie
        1consoude         1pimprenelle      1corbeille-d'or   2arroche          0sarcloir
-       0statice          1fritillaire      1bourrache        1valériane        1carpe
+       0staticé          1fritillaire      1bourrache        1valériane        1carpe
        0fusain           1civette          1buglosse         0sénevé           1houlette
         ),
 # Prairial
         qw(
-       1luzerne          2hémérocalle      0trèfle           2angélique        0canard
-       1mélisse          0fromental        0martagon         0serpolet         1faux
+       1luzerne          2hémérocale       0trèfle           2angélique        0canard
+       1mélisse          0fromental        0martagon         0serpolet         1faulx
        1fraise           1bétoine          0pois             2acacia           1caille
        2œillet           0sureau           0pavot            0tilleul          1fourche
-       0barbeau          1camomille        0chèvrefeuille    0caille-lait      1tanche
+       0barbeau          1camomille        0chèvre-feuille   0caille-lait      1tanche
        0jasmin           1verveine         0thym             1pivoine          0chariot
         ),
 # Messidor
@@ -132,26 +132,26 @@ my @DAYS = (
        0romarin          0concombre        2échalotte        2absinthe         1faucille
        1coriandre        2artichaut        1giroflée         1lavande          0chamois
        0tabac            1groseille        1gesse            1cerise           0parc
-       1menthe           0cumin            0haricot          2orcanète         1pintade
+       1menthe           0cumin            3haricots         2orcanète         1pintade
        1sauge            2ail              1vesce            0blé              1chalémie
         ),
 # Thermidor
         qw(
-       2épautre          0bouillon-blanc   0melon            2ivraie           0bélier
-       1prèle            2armoise          0carthame         1mûre             2arrosoir
+       2épeautre         0bouillon-blanc   0melon            2ivraie           0bélier
+       1prêle            2armoise          0carthame         1mûre             2arrosoir
        0panis            0salicor          2abricot          0basilic          1brebis
        1guimauve         0lin              2amande           1gentiane         2écluse
-       1carline          0câprier          1lentille         2aunée            1loutre
+       1carline          0caprier          1lentille         2aunée            1loutre
        1myrte            0colza            0lupin            0coton            0moulin
         ),
 # Fructidor
         qw(
-       1prune            0millet           0lycoperdon       2escourgeon       0saumon
+       1prune            0millet           0lycoperde        2escourgeon       0saumon
        1tubéreuse        0sucrion          2apocyn           1réglisse         2échelle
        1pastèque         0fenouil          2épine-vinette    1noix             1truite
        0citron           1cardère          0nerprun          0tagette          1hotte
        2églantier        1noisette         0houblon          0sorgho           2écrevisse
-       1bagarade         1verge-d'or       0maïs             0marron           0panier
+       1bigarade         1verge-d'or       0maïs             0marron           0panier
         ),
 # Jours complémentaires
         qw(
