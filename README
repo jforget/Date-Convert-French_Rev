@@ -13,10 +13,10 @@ Between  2003 and  2013, the  world has  moved on  and CPAN  has moved
 on.  In  2003, UTF-8  was  a promising  technic,  but  not yet  widely
 used. In  2013, UTF-8 *is*  widely used. In  2003, there was a  set of
 CPAN  best  practices:  test   scripts  in  t/*.t  for  example.  Some
-recommanded practices appeared later: META.yml for example. And CPANTS
+recommended practices appeared later: META.yml for example. And CPANTS
 was  created  to  provide   a  static  code  analysis  checking  these
-recommanded practices. So  this new version is also  meant to catch up
-with these  recommanded practices. In  other words, I play  the CPANTS
+recommended practices. So  this new version is also  meant to catch up
+with these  recommended practices. In  other words, I play  the CPANTS
 game and I try to improve my rating by updating this module.
 
 PRESENTATION
