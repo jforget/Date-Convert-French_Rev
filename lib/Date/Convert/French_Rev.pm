@@ -1,7 +1,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Perl Date::Convert extension to convert dates from/to the French Revolutionary calendar
-#     Copyright (C) 2001-2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -20,7 +20,7 @@ require Exporter;
 @ISA = qw(Date::Convert Exporter);
 # Do not export methods, therefore export nothing
 @EXPORT = qw(
-        
+
 );
 $VERSION = '0.09';
 
@@ -40,7 +40,7 @@ my @DECADE_DAYS_SHORT = qw ( Déc Pri Duo Tri Qua Qui Sex Sep Oct Non);
 
 # When initializing an array with lists within lists, it means one of two things:
 # Either it is a newbie who does not know how to make multi-dimensional arrays,
-# Or it is a (at least mildly) experienced Perl-coder who, for some reason, 
+# Or it is a (at least mildly) experienced Perl-coder who, for some reason,
 # wants to initialize a flat array with the concatenation of lists.
 # I am a (at least mildly) experienced programmer who wants to use qw() and yet insert
 # comments in some places.
@@ -698,15 +698,49 @@ Jean Forget <JFORGET@cpan.org>
 
 based on Mordechai T. Abzug's work <morty@umbc.edu>
 
+with thanks to  Gérald Sédrati-Dinet (GIBUS at cpan dot  org), for his
+thorough documentation research.
+
 =head1 SEE ALSO
 
-=head2 Software
+=head2 Perl Software
 
-date(1), perl(1), L<Date::Convert>
+perl(1), L<Date::Convert>
 
-calendar/cal-french.el in emacs or xemacs
+L<DateTime>
 
-L<DateTime> and L<DateTime::Calendar::FrenchRevolutionary>
+L<DateTime::Calendar::FrenchRevolutionary>
+or L<https://github.com/jforget/DateTime-Calendar-FrenchRevolutionary>
+
+L<Date::Converter>
+
+=head2 Other Software
+
+date(1)
+
+CALENDRICA 4.0 -- Common Lisp, which can be download in the "Resources" section of
+L<https://www.cambridge.org/us/academic/subjects/computer-science/computing-general-interest/calendrical-calculations-ultimate-edition-4th-edition?format=PB&isbn=9781107683167>
+
+F<calendar/cal-french.el>  in emacs-21.2  or later  or xemacs  21.1.8,
+forked in L<https://github.com/jforget/emacs-lisp-cal-french>
+
+C<Date::Calendar::FrenchRevolutionary> for Raku at L<https://modules.raku.org/dist/Date::Calendar::FrenchRevolutionary:cpan:JFORGET>
+or L<https://github.com/jforget/raku-Date-Calendar-FrenchRevolutionary>
+
+L<https://www.gnu.org/software/apl/Bits_and_Pieces/calfr.apl.html> or L<https://github.com/jforget/apl-calendar-french>
+
+L<https://www.hpcalc.org/details/7309> or L<https://github.com/jforget/hp48-hp50-French-Revolutionary-calendar>
+
+L<https://github.com/jforget/hp41-calfr>
+
+French Calendar for Android at
+L<https://f-droid.org/packages/ca.rmen.android.frenchcalendar/>
+or L<https://github.com/caarmen/FRCAndroidWidget>
+and L<https://github.com/caarmen/french-revolutionary-calendar>
+
+Thermidor for Android at L<https://github.com/jhbadger/Thermidor-Android>
+
+A Ruby program at L<https://github.com/jhbadger/FrenchRevCal-ruby>
 
 =head2 books
 
@@ -722,24 +756,80 @@ The French Revolution, Thomas Carlyle, Oxford University Press
 
 L<http://www.faqs.org/faqs/calendars/faq/part3/>
 
-L<http://h2g2.com/approved_entry/A2903636>
+L<https://h2g2.com/approved_entry/A2903636>
 
-L<http://en.wikipedia.org/wiki/French_Republican_Calendar>
+L<https://www.allhotelscalifornia.com/kokogiakcom/frc/default.asp>
 
-L<http://prairial.free.fr/calendrier/calendrier.php?lien=sommairefr>
+L<https://en.wikipedia.org/wiki/French_Republican_Calendar>
+
+L<https://fr.wikipedia.org/wiki/Calendrier_républicain>
+
+L<http://prairial.free.fr/index.php?lien=cal_sommaireFR>
 (in French)
+
+L<https://archive.org/details/decretdelaconven00fran_40>
+
+"Décret  du  4 frimaire,  an  II  (24  novembre  1793) sur  l'ère,  le
+commencement et l'organisation de l'année et sur les noms des jours et
+des mois"
+
+L<https://archive.org/details/decretdelaconven00fran_41>
+
+Same text, with a slightly different typography.
+
+L<https://purl.stanford.edu/dx068ky1531>
+
+"Archives parlementaires  de 1789 à  1860: recueil complet  des débats
+législatifs & politiques  des Chambres françaises", J.  Madival and E.
+Laurent, et. al.,  eds, Librairie administrative de  P. Dupont, Paris,
+1912.
+
+Starting with  page 6,  this document  includes the  same text  as the
+previous links, with  a much improved typography.  Especially, all the
+"long s"  letters have been replaced  by short s. Also  interesting is
+the text  following the  decree, page 21  and following:  "Annuaire ou
+calendrier pour la seconde année de la République française, annexe du
+décret  du  4  frimaire,  an  II (24  novembre  1793)  sur  l'ère,  le
+commencement et l'organisation de l'année et sur les noms des jours et
+des mois". In the remarks above, it is refered as [Annexe].
+
+L<https://gallica.bnf.fr/ark:/12148/bpt6k48746z>
+
+[Fabre] "Rapport fait à la Convention nationale dans la séance du 3 du
+second mois de la seconde année  de la République française, au nom de
+la   Commission    chargée   de   la   confection    du   calendrier",
+Philippe-François-Nazaire  Fabre  d'Églantine,  Imprimerie  nationale,
+Paris, 1793
+
+L<https://gallica.bnf.fr/ark:/12148/bpt6k49016b>
+
+[Annuaire] "Annuaire  du cultivateur,  pour la  troisième année  de la
+République  : présenté  le  30 pluviôse  de l'an  II  à la  Convention
+nationale, qui en  a décrété l'impression et l'envoi,  pour servir aux
+écoles  de la  République",  Gilbert Romme,  Imprimerie nationale  des
+lois, Paris, 1794-1795
+
+L<https://gallica.bnf.fr/ark:/12148/bpt6k43978x>
+
+"Calendrier militaire,  ou tableau  sommaire des  victoires remportées
+par les  Armées de  la République française,  depuis sa  fondation (22
+septembre 1792),  jusqu'au 9  floréal an  7, époque  de la  rupture du
+Congrès de Rastadt et de la reprise des hostilités" Moutardier, Paris,
+An  VIII de  la République  française.  The source  of the  C<on_date>
+method.
+
 
 =head1 LICENSE
 
-Copyright (c)  2001, 2002, 2003,  2013, 2015 Jean Forget.   All rights
-reserved.  This program is free software.  You can distribute, modify,
-and otherwise mangle Date::Convert::French_Rev under the same terms as
-Perl 5.16.3: GNU  Public License version 1 or  later and Perl Artistic
-License
+Copyright  (c) 2001,  2002, 2003,  2013, 2015,  2020 Jean  Forget. All
+rights reserved.  This program is  free software. You  can distribute,
+modify, and otherwise mangle  Date::Convert::French_Rev under the same
+terms as Perl  5.16.3: GNU Public License version 1  or later and Perl
+Artistic License
 
 You can  find the text  of the licenses  in the F<LICENSE> file  or at
-L<http://www.perlfoundation.org/artistic_license_1_0> and
-L<http://www.gnu.org/licenses/gpl-1.0.html>.
+L<https://dev.perl.org/licenses/artistic.html>
+and L<https://www.gnu.org/licenses/gpl-1.0.html>.
 
 Here is the summary of GPL:
 
@@ -754,7 +844,7 @@ MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU
 General Public License for more details.
 
 You  should have received  a copy  of the  GNU General  Public License
-along  with  this  program;  if   not,  write  to  the  Free  Software
-Foundation, Inc., <http://www.fsf.org/>.
+along with  this program; if not,  see <https://www.gnu.org/licenses/>
+or write to the Free Software Foundation, Inc., L<https://www.fsf.org>.
 
 =cut
