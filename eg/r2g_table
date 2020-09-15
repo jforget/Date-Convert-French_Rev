@@ -3,7 +3,7 @@
 #
 #     Example of Date::Convert::French_Rev script to create a French Revolutionary
 #     to Gregorian conversion table.
-#     Copyright (C) 2001-2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -14,7 +14,7 @@ use Date::Convert::French_Rev;
 use FindBin;
 use constant DEBUG => 0;
 
-my ($columns, $lang, $last, $example, $table_workaround) 
+my ($columns, $lang, $last, $example, $table_workaround)
  = (       9,  'en',    400,    80218, 0);
 
 GetOptions('columns=i'        => \$columns
@@ -62,7 +62,7 @@ if (DEBUG)
 
 # The tables do not contain the Sep-Mar day number, but a letter, which is easier
 # to remember. So to each part - day number combination, we assign a letter.
-# The ordering part then year is more pleasing than the other when reading 
+# The ordering part then year is more pleasing than the other when reading
 # the final charts.
 my $next_letter = 'a';
 my %letter_of_partday  = ();
@@ -88,7 +88,7 @@ if (DEBUG)
 
 # The year -> 2-letter word function is periodic, except for a few glitches
 # each time the Gregorian or F-R century changes. So, years are grouped
-# by four, eight, twelve or more each group is identified by a 8-, 16- or 
+# by four, eight, twelve or more each group is identified by a 8-, 16- or
 # 24-letter word. Interval are built so if two years n and n+4 (or n+8,
 # or n+12) have the same formulas, they may belong to the same interval.
 # If the formulas are different, the interval ends and a new interval
@@ -101,7 +101,7 @@ build_intervals();
 
 if (DEBUG)
   {
-    print "$_ $end_of_interval{$_} $line_for_interval{$_}\n" 
+    print "$_ $end_of_interval{$_} $line_for_interval{$_}\n"
        foreach (sort { $a <=> $b } keys %line_for_interval);
   }
 
@@ -115,7 +115,7 @@ if ($lang eq 'fr')
 else
   { $ref_labels = do "$FindBin::Bin/labels_en" }
 my %labels = %$ref_labels;
-my @fr_month = qw (Vendémiaire Brumaire Frimaire Nivôse   Pluviôse  Ventôse 
+my @fr_month = qw (Vendémiaire Brumaire Frimaire Nivôse   Pluviôse  Ventôse
                    Germinal    Floréal  Prairial Messidor Thermidor Fructidor);
 push @fr_month, "Sans-Culottides<br>$labels{add_days}";
 
@@ -209,7 +209,7 @@ sub html_1 {
   foreach my $n1 (0 .. $columns - 1)
     {
       printf "<td>%2d", $n1;
-      for(my $n0 = $n1 + $columns; $n0 <= 99; $n0 += $columns) 
+      for(my $n0 = $n1 + $columns; $n0 <= 99; $n0 += $columns)
         { printf "<br>%2d", $n0 % 100 }
       print "<br>&nbsp;" if $n1 > 99 % $columns; # better aligned numbers
       print "</td>\n";
@@ -256,7 +256,7 @@ sub html_2header {
   my @letters = sort values %{$letter_of_partday{$part}};
   print "<tr align='center'><th>"
       , join('</th><th>', "$labels{year_ttl} + $offset", @letters)
-      , "</th></tr>\n"; 
+      , "</th></tr>\n";
 }
 
 sub html_two_formulas {

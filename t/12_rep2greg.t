@@ -1,7 +1,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Test script for Date::Convert::French_Rev
-#     Copyright (C) 2001, 2002, 2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001, 2002, 2003, 2013, 2015, 2020 Jean Forget
 #
 #     This program is distributed under the same terms as Perl 5.16.3:
 #     GNU Public License version 1 or later and Perl Artistic License
@@ -37,7 +37,7 @@ sub r2g {
   is($date_resul, $date_g, "expected $date_g, got $date_resul" );
 }
 
-@tests = (["1792 Sep 22",    1,  1,  1], 
+@tests = (["1792 Sep 22",    1,  1,  1],
           ["1793 Oct 23",    2,  2,  2],
           ["1794 July 27",   2, 11,  9], # the demise of Robespierre
           ["1794 Nov 23",    3,  3,  3],

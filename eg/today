@@ -1,9 +1,9 @@
 #!/usr/local/bin/perl -w
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
-#     Example of Date::Convert::French_Rev script to print the date in Gregorian 
+#     Example of Date::Convert::French_Rev script to print the date in Gregorian
 #     and French Revolutionary formats.
-#     Copyright (C) 2001-2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -35,7 +35,7 @@ print $day->date_string("Today is %A %d %B %EY, %Ej%n");
 
 # print discordian(time()), "\n";
 
-# my $shiredate = Date::Tolkien::Shire->new(time); 
+# my $shiredate = Date::Tolkien::Shire->new(time);
 # print "Today is ", $shiredate->on_date, "\n";
 
 __END__

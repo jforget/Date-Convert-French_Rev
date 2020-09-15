@@ -1,7 +1,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Test script for Date::Convert::French_Rev
-#     Copyright (C) 2001, 2002, 2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001, 2002, 2003, 2013, 2015, 2020 Jean Forget
 #
 #     This program is distributed under the same terms as Perl 5.16.3:
 #     GNU Public License version 1 or later and Perl Artistic License
@@ -52,11 +52,11 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
              ["14 Pluviôse, avelinier 0209",      "%e %B, %Oj %L", 2001,  2,  2],
              ["Qua 14 Germinal CCIX, jour du hêtre", "%a %d %B %EY, %Ej", 2001, 4, 3],
              ["Primidi 11 Vendémiaire ccix, Jour de la Pomme de terre", "%A %d %B %Ey, %EJ", 2000, 10, 2],
-             ["Primidi 11 Vendémiaire CCXIX, jour de la pomme de terre", 
+             ["Primidi 11 Vendémiaire CCXIX, jour de la pomme de terre",
                 "%A %d %B %EY, %*", 2010, 10, 2],
-             ["Quintidi 25 Vendémiaire CCXIX, jour du bœuf", 
+             ["Quintidi 25 Vendémiaire CCXIX, jour du bœuf",
                 "%A %d %B %EY, %*", 2010, 10, 16],
-             ["Sextidi 16 Prairial CCXIX, jour de l'œillet", 
+             ["Sextidi 16 Prairial CCXIX, jour de l'œillet",
                 "%A %d %B %EY, %*", 2011,  6,  4],
              [" 5 jour complémentaire 09, Jour des Récompenses", "%e %B %y, %EJ", 2001, 9, 21],
              ["mois : 02  2, jour 046, jour du chervis", "mois : %m %f, jour %j, %Ej", 2000, 11, 6],

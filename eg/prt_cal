@@ -2,7 +2,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Example of Date::Convert::French_Rev script to print a French Revolutionary calendar
-#     Copyright (C) 2001-2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -94,7 +94,7 @@ EOT
       $row .= "<td><pre><br>$cell</pre></td>\n";
     }
   print "<tr align='center'>$row</tr>\n";
-  
+
   # Additional days.
   # By the way, how many additional days? 5 (normal year) or 6 (leap year)?
   my $last = 5;
