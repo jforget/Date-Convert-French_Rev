@@ -1,7 +1,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Test script for Date::Convert::French_Rev
-#     Copyright (C) 2001, 2002, 2003, 2013, 2015 Jean Forget
+#     Copyright (C) 2001, 2002, 2003, 2013, 2015, 2020 Jean Forget
 #
 #     This program is distributed under the same terms as Perl 5.16.3:
 #     GNU Public License version 1 or later and Perl Artistic License
