@@ -503,13 +503,25 @@ The following field descriptors are recognized:
 
 2-digit year - 00 to 99
 
-=item %Y, %G, %L
+=item %Y, %G
 
 year  - 0001  to  9999. There  is  no difference  between these  three
 variants. This is because in the Revolutionary calendar, the beginning
 of a year  is always aligned with the beginning of  a décade, while in
 the Gregorian calendar, the beginning of a year is usually not aligned
 with the beginning of a week.
+
+=item %L
+
+This is  a third specifier  for the year. The  problem is that  I have
+forgotten why I  have implemented this specifier. There  are plenty of
+strftime-like libraries  visible on the  Internet, none of them  has a
+C<%L> specifier for the year. So where does it come from?
+
+I will deprecate  this speficier in the next module  releases. For the
+next two years,  it will function as previously. In  the release after
+this 2-year  delay, the  C<%L> specifier will  produce a  warning. And
+after another 2-year delay it will be removed.
 
 =item %EY, %Ey
 
@@ -658,6 +670,11 @@ The C<Test::Exception>  module is required for the  build process, not
 for  the   regular  use  of   C<Date::Convert::French_Rev>.  But  with
 C<ExtUtils::MakeMaker>,   I   do   not   know  how   to   generate   a
 C<build_requires> entry in F<META.yml>.
+
+You should  not use the  C<%L> strftime  specifier. For the  moment it
+prints the  year, but in some  next release, about in  Vendémiaire 231
+(that is, September 2022) it will produce a warning. And after another
+two years it will be removed.
 
 =head1 HISTORICAL NOTES
 
