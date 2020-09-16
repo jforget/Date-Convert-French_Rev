@@ -98,7 +98,7 @@ EOT
   # Additional days.
   # By the way, how many additional days? 5 (normal year) or 6 (leap year)?
   my $last = 5;
-  $last = 6 if is_leap Date::Convert::French_Rev $year;
+  $last = 6 if Date::Convert::French_Rev->is_leap($year);
   # The additional days are printed in an horizontal row, one per cell
   $row = "";
   foreach my $rd (1 .. $last)
@@ -113,8 +113,8 @@ EOT
 sub one_day {
   my ($ry, $rm, $rd) = @_; # Revolutionary year, month and day
   my ($gd, $wd);           # Gregorian day number and weekday letter
-  my $day = new Date::Convert::French_Rev($ry, $rm, $rd);
-  convert Date::Convert::Gregorian $day;
+  my $day = Date::Convert::French_Rev->new($ry, $rm, $rd);
+  Date::Convert::Gregorian->convert($day);
   $gd = $day->day();
   $wd = $labels{week1}[$day->absol() % 7];
   sprintf "%2d (%s %2d)", $rd, $wd, $gd;
@@ -210,8 +210,8 @@ modify, and otherwise  mangle F<prt_cal> under the same  terms as Perl
 License
 
 You can  find the text  of the licenses  in the F<LICENSE> file  or at
-L<http://www.perlfoundation.org/artistic_license_1_0> and
-L<http://www.gnu.org/licenses/gpl-1.0.html>.
+L<https://dev.perl.org/licenses/artistic.html>
+and L<https://www.gnu.org/licenses/gpl-1.0.html>.
 
 Here is the summary of GPL:
 
@@ -226,8 +226,7 @@ MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU
 General Public License for more details.
 
 You  should have received  a copy  of the  GNU General  Public License
-along  with  this  program;  if   not,  write  to  the  Free  Software
-Foundation, Inc.,  59 Temple Place, Suite 330,  Boston, MA 02111-1307,
-USA.
+along with  this program; if not,  see <https://www.gnu.org/licenses/>
+or write to the Free Software Foundation, Inc., L<https://www.fsf.org>.
 
 =cut

@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Example of Date::Convert::French_Rev script to create a French Revolutionary
@@ -8,7 +8,9 @@
 #     See the license in the embedded documentation below.
 #
 
+use utf8;
 use strict;
+use warnings;
 use Getopt::Long;
 use Date::Convert::French_Rev;
 use FindBin;
@@ -25,6 +27,8 @@ GetOptions('columns=i'        => \$columns
 die "At least 5 colmuns" if $columns < 5;
 die "The number of columns must be a multiple of 4 plus 1 (e.g. 5, 9 or 13)"
   unless $columns % 4 == 1;
+
+binmode STDOUT, ':utf8';
 
 --$columns; # because actually we do not want to be bothered with the heading column
 
@@ -137,8 +141,8 @@ sub day_of_yearpart {
 
   # computed version
   my $month = $part eq 'b' ? 1 : 7;
-  my $date =  new Date::Convert::French_Rev $year, $month, 1;
-  convert Date::Convert::Gregorian $date;
+  my $date = Date::Convert::French_Rev->new($year, $month, 1);
+  Date::Convert::Gregorian->convert($date);
   my $day = $date->day();
   # if no sample year yet, remember this one
   $year_of_partday{$part}{$day} = $year unless $year_of_partday{$part}{$day};
@@ -189,14 +193,14 @@ sub formulas {
   my ($year, $month) = @_;
   my @formulas = ();
   my @month = qw(Sep Oct Nov Dec Jan Feb Mar Apr May Jun Jul Aug Sep);
-  my $date = new Date::Convert::French_Rev $year, $month, 1;
-  convert Date::Convert::Gregorian $date;
+  my $date = Date::Convert::French_Rev->new($year, $month, 1);
+  Date::Convert::Gregorian->convert($date);
   my $offset = $date->day() - 1;
   push @formulas, "+$offset $labels{month3}[$date->month() - 1]";
   if ($month < 13)
     {
-      $date = new Date::Convert::French_Rev $year, $month, 30;
-      convert Date::Convert::Gregorian $date;
+      $date = Date::Convert::French_Rev->new($year, $month, 30);
+      Date::Convert::Gregorian->convert($date);
       $offset = 30 - $date->day();
       push @formulas, "-$offset $labels{month3}[$date->month() - 1]";
     }
@@ -298,9 +302,9 @@ sub usage {
     }
 
   # First example
-  my $date = new Date::Convert::French_Rev $y, $m, $d;
+  my $date = Date::Convert::French_Rev->new($y, $m, $d);
   my $title_date = $date->date_string("%d %B %EY");
-  convert Date::Convert::Gregorian $date;
+  Date::Convert::Gregorian->convert($date);
   my $y2       = sprintf "%02d", $y % 100;
   my $part     = $m <= 6 ? 'b' : 'e';
   my $offset   = $part eq 'e' ? 1792 : 1791;
@@ -325,9 +329,9 @@ sub usage {
 
   # Second example: Ventôse
   # $m = 6;
-  $date = new Date::Convert::French_Rev $y, 6, $d;
+  $date = Date::Convert::French_Rev->new($y, 6, $d);
   $title_date = $date->date_string("%d %B %EY");
-  convert Date::Convert::Gregorian $date;
+  Date::Convert::Gregorian->convert($date);
   @formulas   = formulas($y, 6);
   my $bletter = letter_of_yearpart($y, 'b');
   my $eletter = letter_of_yearpart($y, 'e');
@@ -429,8 +433,8 @@ modify, and otherwise mangle F<r2g_table> under the same terms as Perl
 License
 
 You can  find the text  of the licenses  in the F<LICENSE> file  or at
-L<http://www.perlfoundation.org/artistic_license_1_0> and
-L<http://www.gnu.org/licenses/gpl-1.0.html>.
+L<https://dev.perl.org/licenses/artistic.html>
+and L<https://www.gnu.org/licenses/gpl-1.0.html>.
 
 Here is the summary of GPL:
 
@@ -445,8 +449,7 @@ MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU
 General Public License for more details.
 
 You  should have received  a copy  of the  GNU General  Public License
-along  with  this  program;  if   not,  write  to  the  Free  Software
-Foundation, Inc.,  59 Temple Place, Suite 330,  Boston, MA 02111-1307,
-USA.
+along with  this program; if not,  see <https://www.gnu.org/licenses/>
+or write to the Free Software Foundation, Inc., L<https://www.fsf.org>.
 
 =cut

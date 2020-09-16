@@ -8,6 +8,7 @@
 #     See the license in the embedded documentation below.
 #
 
+use utf8;
 use strict;
 use Getopt::Long;
 use Date::Convert::French_Rev;
@@ -25,6 +26,8 @@ GetOptions('columns=i'        => \$columns
 die "At least 5 columns" if $columns < 5;
 die "The number of columns must be a multiple of 4 plus 1 (e.g. 5, 9 or 13)"
   unless $columns % 4 == 1;
+
+binmode STDOUT, ':utf8';
 
 --$columns; # because actually we do not want to be bothered with the heading column
 
@@ -137,8 +140,8 @@ sub day_of_yearpart {
 
   # computed version
   my $month = $part eq 'b' ? 1 : $part eq 'm' ? 3 : 10;
-  my $date =  new Date::Convert::Gregorian $year, $month, 1;
-  convert Date::Convert::French_Rev $date;
+  my $date = Date::Convert::Gregorian->new($year, $month, 1);
+  Date::Convert::French_Rev->convert($date);
   my $day = $date->day();
   # if no sample year yet, remember this one
   $year_of_partday{$part}{$day} = $year unless $year_of_partday{$part}{$day};
@@ -193,8 +196,8 @@ sub formulas {
   my ($year, $month) = @_;
   my @formulas = ();
   my @month = qw(Niv Plu Vnt Ger Flo Pra Mes The Fru S-C Vnd Bru Fri Niv);
-  my $date = new Date::Convert::Gregorian $year, $month, 1;
-  convert Date::Convert::French_Rev $date;
+  my $date = Date::Convert::Gregorian->new($year, $month, 1);
+  Date::Convert::French_Rev->convert($date);
   my $offset = $date->day() - 1;
   if ($month <= 9) # Have to split in two, because of the additional days within @month
     {
@@ -210,8 +213,8 @@ sub formulas {
     }
   if ($month == 9)
     {
-      $date  = new Date::Convert::French_Rev $year - 1791, 1, 1;
-      convert Date::Convert::Gregorian $date;
+      $date  = Date::Convert::French_Rev->new($year - 1791, 1, 1);
+      Date::Convert::Gregorian->convert($date);
       $offset = $date->day() - 1;
       push @formulas, "-$offset Vnd";
     }
@@ -342,8 +345,8 @@ sub usage {
 
   # First example
   my $gr_date  = &{$labels{format}}($y, $m, $d, $lang);
-  my $date = new Date::Convert::Gregorian $y, $m, $d;
-  convert Date::Convert::French_Rev $date;
+  my $date = Date::Convert::Gregorian->new($y, $m, $d);
+  Date::Convert::French_Rev->convert($date);
   my $y2       = sprintf "%02d", $y % 100;
   my $part     = $m <= 2 ? 'b' : $m < 9 ? 'm' : 'e';
   my $offset   = $part eq 'e' ? 1791 : 1792;
@@ -368,8 +371,8 @@ sub usage {
   # Second example: September
   # $m = 9;
   $gr_date  = &{$labels{format}}($y, 9, $d, $lang);
-  $date = new Date::Convert::Gregorian $y, 9, $d;
-  convert Date::Convert::French_Rev $date;
+  $date = Date::Convert::Gregorian->new($y, 9, $d);
+  Date::Convert::French_Rev->convert($date);
   @formulas   = formulas($y, 9);
   my $mletter = letter_of_yearpart($y, 'm');
   my $eletter = letter_of_yearpart($y, 'e');
@@ -477,8 +480,8 @@ modify, and otherwise mangle F<g2r_table> under the same terms as Perl
 License
 
 You can  find the text  of the licenses  in the F<LICENSE> file  or at
-L<http://www.perlfoundation.org/artistic_license_1_0> and
-L<http://www.gnu.org/licenses/gpl-1.0.html>.
+L<https://dev.perl.org/licenses/artistic.html>
+and L<https://www.gnu.org/licenses/gpl-1.0.html>.
 
 Here is the summary of GPL:
 
@@ -493,9 +496,8 @@ MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU
 General Public License for more details.
 
 You  should have received  a copy  of the  GNU General  Public License
-along  with  this  program;  if   not,  write  to  the  Free  Software
-Foundation, Inc.,  59 Temple Place, Suite 330,  Boston, MA 02111-1307,
-USA.
+along with  this program; if not,  see <https://www.gnu.org/licenses/>
+or write to the Free Software Foundation, Inc., L<https://www.fsf.org>.
 
 =cut
 
