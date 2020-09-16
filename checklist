@@ -1,0 +1,103 @@
+-*- encoding: utf-8; indent-tabs-mode: nil -*-
+
+See Merijn's checklist:
+https://github.com/Tux/Release-Checklist/blob/master/Checklist.md
+
+Check GPL-mandated comments (including electronic address of FSF) in:
+-- Makefile.PL
+-- lib/Date/Convert/French_Rev.pm top-file comments
+-- lib/Date/Convert/French_Rev.pm POD "LICENSE" paragraph
+-- t/*.t
+-- eg/g2r_table
+-- eg/labels_en
+-- eg/labels_fr
+-- eg/prt_cal
+-- eg/r2g_table
+-- eg/today
+
+Check version number in:
+-- Changes
+-- Makefile.PL
+-- lib/Date/Convert/French_Rev.pm top-file, code ($VERSION)
+
+Check copyright years in:
+-- README
+-- Makefile.PL
+-- lib/Date/Convert/French_Rev.pm top-file comments and POD "LICENSE" paragraph
+-- t/*.t top-file comments
+-- eg/g2r_table top-file comments and POD "LICENSE" paragraph
+-- eg/labels_en top-file comments
+-- eg/labels_fr top-file comments
+-- eg/prt_cal   top-file comments and POD "LICENSE" paragraph
+-- eg/r2g_table top-file comments and POD "LICENSE" paragraph
+-- eg/today     top-file comments and POD "LICENSE" paragraph
+
+Check that the proper year is printed in eg/result
+
+MANIFEST: among others, check that all new test files are mentionned
+
+Checks by file
+--------------
+
+lib/DateTime/Calendar/FrenchRevolutionary.pm, top of the file
+-- GPL mandated comment
+-- version number
+-- copyright years
+
+lib/DateTime/Calendar/FrenchRevolutionary.pm, POD "LICENSE" paragraph
+-- GPL mandated comment
+-- copyright years
+
+Makefile.PL
+-- version number
+-- GPL mandated comment
+-- copyright years
+
+t/*.t
+-- GPL mandated comment
+-- copyright years
+
+eg/*
+-- GPL mandated comment
+-- copyright years
+
+MANIFEST
+-- among others, check that all new test files are mentionned
+
+Changes
+-- version number
+-- release date
+-- event related to the release date, if applicable
+
+Kwalitee
+--------
+
+Coverage: preferably with perlbrew perl-5.28.0 (or later?)
+
+Changes: Type the proper release date for the latest version
+
+Build META.{json,yml} and .tar.gz with perlbrew perl-5.28.0 and make.
+
+Check contents of META.{json,yml}:
+  version number (2x)
+  minimum perl version
+  dynamic config 0
+  provides (with version number)
+  prerequisite: strict and warnings
+
+After release
+=============
+
+Github:
+    git tag -m 'Release to CPAN' v0.09
+    git push --tags -u origin master
+
+Change version number in:
+-- Changes
+-- Makefile.PL
+-- lib/Date/Convert/French_Rev.pm top-file
+
+Github:
+    git add Changes Makefile.PL lib/Date/Convert/French_Rev.pm
+    git commit
+    git push --tags -u origin master
