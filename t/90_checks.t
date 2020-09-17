@@ -30,8 +30,11 @@
 # Checking the value checks.
 #
 use Test::More;
-use Test::Exception;
 use Date::Convert::French_Rev;
+BEGIN {
+  eval "use Test::Exception;";
+  plan skip_all => "Test::Exception needed" if $@;
+}
 
 my @tests = ( [ "Year number is zero",              0,  1,  1 ],
               [ "Year number is negative",         -2,  1,  1 ],

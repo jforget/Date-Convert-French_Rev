@@ -666,10 +666,9 @@ I  have checked the  manpage for  C<date(1)> in  two flavors  of Unix:
 Linux and AIX. In the best case, the extended field descriptors C<%Ex>
 and C<%Oy> are poorly documented, but usually they are not documented.
 
-The C<Test::Exception>  module is required for the  build process, not
-for  the   regular  use  of   C<Date::Convert::French_Rev>.  But  with
-C<ExtUtils::MakeMaker>,   I   do   not   know  how   to   generate   a
-C<build_requires> entry in F<META.yml>.
+The C<Test::Exception>  and C<Test::Warning> modules are  required for
+the    build    process,    not     for    the    regular    use    of
+C<Date::Convert::French_Rev>.
 
 You should  not use the  C<%L> strftime  specifier. For the  moment it
 prints the  year, but in some  next release, about in  Vendémiaire 231

@@ -61,8 +61,9 @@ WriteMakefile(
              }
           },
           'test' => {
-             'requires' => {
-                'Test::Exception' => '0',
+             'recommends' => {
+                  'Test::Exception' => '0'
+                , 'Test::Warnings'  => '0'
              }
           },
        },

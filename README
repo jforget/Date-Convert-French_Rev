@@ -33,16 +33,19 @@ recommended practices. So  this new version is also  meant to catch up
 with these  recommended practices. In  other words, I play  the CPANTS
 game and I try to improve my rating by updating this module.
 
-REQUIREMENTS
+PREREQUISITES
 
 Roman, by Alexandr Ciornii (CHORNY)
 Date::Convert, by Mordechai Abzug (MORTY)
+
+Optionally
 Test::Exception, by Adrian Howard (ADIE)
+Test::Warnings, by Karen Etheridge (ETHER)
 
 INSTALL
 
-First intall Test::Exception,  Roman.pm and Date::Convert.pm, and then
-install the normal way:
+First  intall  Roman.pm and  Date::Convert.pm,  and  then install  the
+normal way:
 
 perl Makefile.PL
 make
