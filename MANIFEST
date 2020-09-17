@@ -32,3 +32,4 @@ t/50_format.t
 t/72_utf8.t
 t/80_neg.t
 t/90_checks.t
+t/92_deprecating_percentL.t

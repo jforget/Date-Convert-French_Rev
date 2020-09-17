@@ -49,7 +49,7 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
              # Groundhog day? No, jour de l'avelinier
              ["14 Plu, jour de l'avelinier 0209", "%d %b, %Ej %Y", 2001,  2,  2],
              ["14 Plu, Jour de l'Avelinier 0209", "%e %h, %EJ %G", 2001,  2,  2],
-             ["14 Pluviôse, avelinier 0209",      "%e %B, %Oj %L", 2001,  2,  2],
+             ["14 Pluviôse, avelinier 0209",      "%e %B, %Oj %Y", 2001,  2,  2],
              ["Qua 14 Germinal CCIX, jour du hêtre", "%a %d %B %EY, %Ej", 2001, 4, 3],
              ["Primidi 11 Vendémiaire ccix, Jour de la Pomme de terre", "%A %d %B %Ey, %EJ", 2000, 10, 2],
              ["Primidi 11 Vendémiaire CCXIX, jour de la pomme de terre",
@@ -69,13 +69,13 @@ my @tests = (["Nonidi 09 Thermidor II", "%A %d %B %EY", 1794,  7, 27],
              # almost every specifier
              [<<"RES", <<"FMT",     2004,  8, 17],
 a Pri A Primidi b Fru B Fructidor c %c C %C d 01 D %D e  1 f 12 F %F G 0212 g %g
-h Fru H %H i %i I %I j 331 J %J k %k K %K l %l L 0212 m 12 M %M o %o p %p P %P q %q Q %Q r %r R %R
+h Fru H %H i %i I %I j 331 J %J k %k K %K l %l m 12 M %M o %o p %p P %P q %q Q %Q r %r R %R
 s %s S %S T %T u %u U %U V %V w  1 W %W x %x X %X y 12 Y 0212 Ey ccxii EY CCXII z %z Z %Z
 Ea %Ea EA %EA Oa %Oa OA %OA E! %E! + \t
 
 RES
 a %a A %A b %b B %B c %c C %C d %d D %D e %e f %f F %F G %G g %g
-h %h H %H i %i I %I j %j J %J k %k K %K l %l L %L m %m M %M o %o p %p P %P q %q Q %Q r %r R %R
+h %h H %H i %i I %I j %j J %J k %k K %K l %l m %m M %M o %o p %p P %P q %q Q %Q r %r R %R
 s %s S %S T %T u %u U %U V %V w %w W %W x %x X %X y %y Y %Y Ey %Ey EY %EY z %z Z %Z
 Ea %Ea EA %EA Oa %Oa OA %OA E! %E! %+ %t%n
 FMT
