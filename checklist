@@ -32,7 +32,14 @@ Check copyright years in:
 -- eg/r2g_table top-file comments and POD "LICENSE" paragraph
 -- eg/today     top-file comments and POD "LICENSE" paragraph
 
+Check tabs, end-of-line spaces and http addresses:
+-- grep -r -P " $" *|grep -v '^Makefile:'
+-- grep -r -P "\t" *|grep -v '^Makefile:'
+-- grep -r -P "http:" *
+
 Check that the proper year is printed in eg/result
+
+Run the example scripts from eg
 
 MANIFEST: among others, check that all new test files are mentionned
 
