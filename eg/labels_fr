@@ -7,8 +7,8 @@
 #     GNU Public License version 1 or later and Perl Artistic License
 #
 #     You can find the text of the licenses in the F<LICENSE> file or at
-#     L<http://www.perlfoundation.org/artistic_license_1_0>
-#     and L<http://www.gnu.org/licenses/gpl-1.0.html>.
+#     L<https://dev.perl.org/licenses/artistic.html>
+#     and L<https://www.gnu.org/licenses/gpl-1.0.html>.
 #
 #     Here is the summary of GPL:
 #
@@ -24,12 +24,15 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program; if not, write to the Free Software Foundation,
-#     Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+#     Inc., <https://www.fsf.org/>.
 #
 #
 # Le hachage des libellés
 #
 use utf8;
+use strict;
+use warnings;
+
 my %labels =
 (  calendar  => 'Calendrier'
  , month3    => [ qw(jan fév mars avr mai juin juil août sep oct nov déc) ]
@@ -225,6 +228,8 @@ EOT
 
 __END__
 
+=encoding utf8
+
 =head1 NOM
 
 prt_cal - Imprime le calendrier républicain pour une date.
@@ -245,11 +250,11 @@ B<prt_cal> imprime le calendrier républicain pour l'année transmise en
 paramètre. Vous  pouvez demander  le calendrier pour  n'importe quelle
 année après la proclamation de la Première République, vous n'êtes pas
 limités à la  période pendant laquelle le calendrier  a réellement été
-utilisé.  Par exemple, vous pouvez demander le calendrier pour l'année
-210,  ce qui correspond  dans le  calendrier grégorien  à fin  2001 et
-début  2002.   La sortie  obtenue  est  un  fichier HTML.  Le  fichier
-comporte de brèves indications permettant de trouver la correspondance
-avec le calendrier grégorien.
+utilisé. Par exemple, vous pouvez  demander le calendrier pour l'année
+210, ce  qui correspond  dans le  calendrier grégorien  à fin  2001 et
+début 2002.  La sortie obtenue est  un fichier HTML codé  en UTF-8. Le
+fichier  comporte  de  brèves  indications permettant  de  trouver  la
+correspondance avec le calendrier grégorien.
 
 =head1 OPTIONS DE C<prt_cal>
 
@@ -282,12 +287,14 @@ d'afficher une quelconque photo d'un autre genre...
 
 Vous pouvez essayer
 
-  http://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=kitten+basket
-  http://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=mountains
+  https://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=kitten+basket
+  https://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=mountains
 
 Mais surtout pas
 
-  http://images.google.com/images?q=Delacroix+libert%C3%A9+guidant+peuple&hl=en&lr=&ie=UTF-8&output=search
+  https://images.google.com/images?q=Delacroix+libert%C3%A9+guidant+peuple&hl=en&lr=&ie=UTF-8&output=search
+
+=back
 
 =head1 PARAMÈTRE DE C<prt_cal>
 
@@ -347,7 +354,7 @@ Français
 =item columns
 
 Nombre de colonnes  à utiliser pour la première  table. Ce nombre doit
-être un  multuple de 4, plus  1 : 5, 9,  13 ou 17.  Compte  tenu de la
+être un  multiple de 4, plus  1 : 5, 9,  13 ou 17.  Compte  tenu de la
 quasi-périodicité des jours bissextiles,  les années sont groupées par
 4 dans la première table.  Il faut une colonne supplémentaire pour les
 titres  de  ligne.   Notez  que  vous  pouvez  spécifier  des  nombres

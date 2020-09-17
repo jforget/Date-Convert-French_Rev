@@ -6,6 +6,7 @@
 #
 #     See the license in the embedded documentation below.
 #
+use utf8;
 use strict;
 use warnings;
 use FindBin;
@@ -21,18 +22,21 @@ GetOptions('lang=s' => \$lang, 'kitten=s' => \$pict);
 # I18N
 #
 my $ref_labels;
-if ($lang eq 'fr')
-  { $ref_labels = do "$FindBin::Bin/labels_fr" }
-else
-  { $ref_labels = do "$FindBin::Bin/labels_en" }
+if ($lang eq 'fr') {
+  $ref_labels = do "$FindBin::Bin/labels_fr";
+}
+else {
+  $ref_labels = do "$FindBin::Bin/labels_en";
+}
 my %labels = %$ref_labels;
 
+binmode STDOUT, ':utf8';
+
 my $annee;
-foreach $annee (@ARGV)
-  {
-    warn "Invalid year", next if $annee <= 0;
-    prt_cal ($annee);
-  }
+foreach $annee (@ARGV) {
+  warn "Invalid year", next if $annee <= 0;
+  prt_cal ($annee);
+}
 
 
 sub prt_cal {
@@ -67,11 +71,10 @@ EOT
 
   # Building the first six months
   my $row = '';
-  foreach my $m (1..6)
-    {
-      my $cell = join '<br>', map { one_day($year, $m, $_) } (1..30);
-      $row .= "<td><pre><br>$cell</pre></td>\n";
-    }
+  foreach my $m (1..6) {
+    my $cell = join '<br />', map { one_day($year, $m, $_) } (1..30);
+    $row .= "<td><pre><br>$cell</pre></td>\n";
+  }
 
   # Printing the first six months and the headers for the last six months
   print <<"EOT";
@@ -88,11 +91,10 @@ EOT
 
   # Building the "-al" and "-idor" months
   $row = "";
-  foreach my $m (7..12)
-    {
-      my $cell = join '<br>', map { one_day($year, $m, $_) } (1..30);
-      $row .= "<td><pre><br>$cell</pre></td>\n";
-    }
+  foreach my $m (7..12) {
+    my $cell = join '<br />', map { one_day($year, $m, $_) } (1..30);
+    $row .= "<td><pre><br>$cell</pre></td>\n";
+  }
   print "<tr align='center'>$row</tr>\n";
 
   # Additional days.
@@ -101,8 +103,9 @@ EOT
   $last = 6 if Date::Convert::French_Rev->is_leap($year);
   # The additional days are printed in an horizontal row, one per cell
   $row = "";
-  foreach my $rd (1 .. $last)
-    { $row .= "<td><pre><br>" . one_day($year, 13, $rd) . "</pre></td>\n" }
+  foreach my $rd (1 .. $last) {
+    $row .= "<td><pre><br>" . one_day($year, 13, $rd) . "</pre></td>\n";
+  }
   print <<"EOT";
 <tr align='center'><td colspan='6'>$labels{add_days}</td></tr>
 <tr align='center'>$row</tr>
@@ -176,20 +179,20 @@ pictures involving scantily clad ladies.
 
 You can try
 
-  http://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=kitten+basket
-  http://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=mountains
+  https://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=kitten+basket
+  https://images.google.com/images?hl=en&lr=&ie=ISO-8859-1&output=search&q=mountains
 
 but do not even think about
 
-  http://images.google.com/images?q=Delacroix+libert%C3%A9+guidant+peuple&hl=en&lr=&ie=UTF-8&output=search
+  https://images.google.com/images?q=Delacroix+libert%C3%A9+guidant+peuple&hl=en&lr=&ie=UTF-8&output=search
 
 =back
 
 =head1 PARAMETERS
 
-There is a single parameter, the year, according to the French
-Revolutionary calendar. This parameter is numeric
-(Roman number not permitted).
+There  is  a single  parameter,  the  year,  according to  the  French
+Revolutionary calendar.  This parameter  is numeric (Roman  number not
+permitted).
 
 =head1 KNOWN BUGS
 

@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
-#     Example of Date::Convert::French_Rev script to create a French Revolutionary
-#     to Gregorian conversion table.
+#     Example of Date::Convert::French_Rev script:
+#     print a few tables for an easy conversion of date from French Revolutionary to Gregorian
 #     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
 #
 #     See the license in the embedded documentation below.
@@ -363,10 +363,10 @@ r2g_table [--columns=I<nb>] [--example=I<date>] [--lang=I<language>] [--table-wo
 =head1 DESCRIPTION
 
 This program prints three tables, plus a small text showing how to use
-these tables.  The output  uses the HTML  format. When printed  from a
-table-aware web  browser, these tables  allow a computer-less  user to
-convert dates from the  French Revolutionary calendar to the Gregorian
-calendar.
+these tables.  The output  uses UTF-8 encoding  and HTML  format. When
+printed  from  a  table-aware  web   browser,  these  tables  allow  a
+computer-less  user to  convert  dates from  the French  Revolutionary
+calendar to the Gregorian calendar.
 
 =head1 OPTIONS
 
