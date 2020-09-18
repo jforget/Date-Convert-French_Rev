@@ -19,8 +19,16 @@ binmode STDOUT, ':utf8';
 
 my ($y, $m, $d) = (localtime())[5, 4, 3];
 my $day =  Date::Convert::Gregorian->new($y + 1900, $m + 1, $d);
+print "Gregorian: ", $day->date_string(), "\n";
+
+Date::Convert::Julian->convert($day);
+print "Julian: ", $day->date_string(), "\n";
+
+Date::Convert::Hebrew->convert($day);
+print "Hebrew: ", $day->date_string(), "\n";
+
 Date::Convert::French_Rev->convert($day);
-print $day->date_string("Today is %A %d %B %EY, %Ej%n");
+print $day->date_string("French Revolutionary: %A %d %B %EY, %Ej%n");
 
 __END__
 
@@ -28,7 +36,7 @@ __END__
 
 =head1 NAME
 
-today - Print the current date in Gregorian and French Revolutionary formats.
+today - Print the current date in various calendars.
 
 =head1 SYNOPSIS
 
@@ -36,10 +44,8 @@ today - Print the current date in Gregorian and French Revolutionary formats.
 
 =head1 DESCRIPTION
 
-This  program  prints  the   current  date  in  Gregorian  and  French
-Revolutionary  formats.  Other  formats  are  available  if  you  have
-installed the corresponding modules. You  just have to remove the hash
-chars commenting out the conversion lines.
+This program prints the current  date in Gregorian, Julian, Hebrew and
+French Revolutionary calendar.
 
 =head1 OPTIONS
 
