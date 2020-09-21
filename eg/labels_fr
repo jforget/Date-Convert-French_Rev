@@ -373,11 +373,14 @@ exprimée dans le calendrier républicain.
 
 =item table-workaround
 
-J'ai remarqué  que l'un des navigateurs  web que j'utilise a  du mal à
-mettre en forme un texte  comportant des tables puis à l'imprimer.  Il
-lui arrive d'oublier quelques lignes suivant la table.  J'ai trouvé un
-moyen  de contournement,  qui consiste  à englober  le texte  dans une
-table. Cette option active cette bidouille.
+Conservé pour des raisons historiques
+
+Au début de l'écriture de cette  distribution, dans les années 2001 et
+2002, j'avais  remarqué que l'un  des navigateurs web  que j'utilisais
+avait du mal à  mettre en forme un texte comportant  des tables puis à
+l'imprimer.  Il  lui arrivait  d'oublier  quelques  lignes suivant  la
+table.  J'avais trouvé  un moyen  de contournement,  qui consistait  à
+englober le texte dans une table. Cette option active cette bidouille.
 
 =back
 

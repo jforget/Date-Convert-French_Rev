@@ -44,7 +44,7 @@ my @parts = ('b', 'e');
 # This specific day is
 #      b => 1 Vendémiaire => ?? September
 #      e => 1 Germinal    => ?? March
-# We partially store the reverse : for each part or year and each G day number,
+# We partially store the reverse : for each part of year and each Grg day number,
 # which year can be taken as an sample.
 my @day_of_yearpart;
 my %year_of_partday;
@@ -122,7 +122,7 @@ else {
 
 my @fr_month = qw (Vendémiaire Brumaire Frimaire Nivôse   Pluviôse  Ventôse
                    Germinal    Floréal  Prairial Messidor Thermidor Fructidor);
-push @fr_month, "Sans-Culottides<br>$labels{add_days}";
+push @fr_month, "Sans-Culottides<br />$labels{add_days}";
 
 html_0($labels{titler2g});
 html_1($labels{title1});
@@ -229,9 +229,10 @@ sub html_1 {
   foreach my $n1 (0 .. $columns - 1)
     {
       printf "<td>%2d", $n1;
-      for(my $n0 = $n1 + $columns; $n0 <= 99; $n0 += $columns)
-        { printf "<br>%2d", $n0 % 100 }
-      print "<br>&nbsp;" if $n1 > 99 % $columns; # better aligned numbers
+      for(my $n0 = $n1 + $columns; $n0 <= 99; $n0 += $columns) {
+        printf "<br />%2d", $n0 % 100;
+      }
+      print "<br />&nbsp;" if $n1 > 99 % $columns; # better aligned numbers
       print "</td>\n";
     }
   print "</tr>\n";
@@ -287,7 +288,7 @@ sub html_two_formulas {
     {
       my $year = $year_of_partday{$part}{$_};
       my @formulas = formulas($year, $month);
-      print "<td>$formulas[0]<br>$formulas[1]</td>\n";
+      print "<td>$formulas[0]<br />$formulas[1]</td>\n";
     }
   print "</tr>\n";
 }
@@ -427,12 +428,14 @@ French
 
 =item table-workaround
 
-I have noticed that when one of the web browsers I use renders tables,
-it has  problems with  plain text following  the tables, and  it might
-skip a few  plain text lines. In the present case,  the first lines of
-the  instructions for  use  disappear.  The  workaround  I have  found
-consists in  building a  table around the  instructions for  use. This
-option triggers this workaround.
+Kept for historical reasons.
+
+Many years ago,  around 2001 or 2002,  I had noticed that  when my web
+browser rendered and  printed tables, it had problems  with plain text
+following the tables, and it would skip a few plain text lines. In the
+present  case, the  first  lines  of the  instructions  for use  would
+disappear. The  workaround I had  found consisted in building  a table
+around the instructions for use. This option triggers this workaround.
 
 =back
 

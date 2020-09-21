@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Example of Date::Convert::French_Rev script:
@@ -10,6 +10,7 @@
 
 use utf8;
 use strict;
+use warnings;
 use Getopt::Long;
 use Date::Convert::French_Rev;
 use FindBin;
@@ -42,7 +43,7 @@ my @parts = ('b', 'm', 'e');
 #      b => 1 January
 #      m => 1 March
 #      e => 1 October
-# We partially store the reverse : for each part or year and each F_R day number,
+# We partially store the reverse : for each part of year and each F_R day number,
 # which year can be taken as an sample.
 my %day_of_yearpart;
 my %year_of_partday;
@@ -243,9 +244,10 @@ sub html_1 {
   foreach my $n1 (0 .. $columns - 1)
     {
       printf "<td>%2d", $n1;
-      for (my $n0 = $n1 + $columns; $n0 <= 99; $n0 += $columns)
-        { printf "<br>%2d", $n0 }
-      print "<br>&nbsp;" if $n1 > 99 % $columns; # better aligned numbers
+      for (my $n0 = $n1 + $columns; $n0 <= 99; $n0 += $columns) {
+        printf "<br />%2d", $n0;
+      }
+      print "<br />&nbsp;" if $n1 > 99 % $columns; # better aligned numbers
       print "</td>\n";
     }
   print "</tr>\n";
@@ -287,7 +289,7 @@ sub html_2 {
         {
           my $year = $year_of_partday{$part}{$_};
           my @formulas = formulas($year, $month);
-          print "<td>$formulas[0]<br>$formulas[1]</td>\n";
+          print "<td>$formulas[0]<br />$formulas[1]</td>\n";
         }
       print "</tr>\n";
     }
@@ -473,12 +475,14 @@ French
 
 =item table-workaround
 
-I have noticed that when my  web browser renders and prints tables, it
-has problems with plain text following the tables, and it might skip a
-few plain  text lines.  In  the present case,  the first lines  of the
-instructions for use disappear.   The workaround I have found consists
-in  building a  table around  the  instructions for  use. This  option
-triggers this workaround.
+Kept for historical reasons.
+
+Many years ago,  around 2001 or 2002,  I had noticed that  when my web
+browser rendered and  printed tables, it had problems  with plain text
+following the tables, and it would skip a few plain text lines. In the
+present  case, the  first  lines  of the  instructions  for use  would
+disappear. The  workaround I had  found consisted in building  a table
+around the instructions for use. This option triggers this workaround.
 
 =back
 
