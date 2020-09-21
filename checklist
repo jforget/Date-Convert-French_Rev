@@ -46,12 +46,12 @@ MANIFEST: among others, check that all new test files are mentionned
 Checks by file
 --------------
 
-lib/DateTime/Calendar/FrenchRevolutionary.pm, top of the file
+lib/Date/Convert/French_Rev.pm top of the file
 -- GPL mandated comment
 -- version number
 -- copyright years
 
-lib/DateTime/Calendar/FrenchRevolutionary.pm, POD "LICENSE" paragraph
+lib/Date/Convert/French_Rev.pm POD "LICENSE" paragraph
 -- GPL mandated comment
 -- copyright years
 
@@ -69,7 +69,7 @@ eg/*
 -- copyright years
 
 MANIFEST
--- among others, check that all new test files are mentionned
+-- among others, check that all new test files and all new example files are mentionned
 
 Changes
 -- version number
