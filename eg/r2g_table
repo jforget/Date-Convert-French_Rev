@@ -111,14 +111,15 @@ if (DEBUG)
 
 # Some language-dependant variables are set in the "done" files.
 # Therefore, they cannot be "my" variables, they must be global.
-# I don't use "our", because it would break in older versions.
 
-my $ref_labels;
-if ($lang eq 'fr')
-  { $ref_labels = do "$FindBin::Bin/labels_fr" }
-else
-  { $ref_labels = do "$FindBin::Bin/labels_en" }
-my %labels = %$ref_labels;
+our %labels;
+if ($lang eq 'fr') {
+  do "$FindBin::Bin/labels_fr";
+}
+else {
+  do "$FindBin::Bin/labels_en";
+}
+
 my @fr_month = qw (Vendémiaire Brumaire Frimaire Nivôse   Pluviôse  Ventôse
                    Germinal    Floréal  Prairial Messidor Thermidor Fructidor);
 push @fr_month, "Sans-Culottides<br>$labels{add_days}";

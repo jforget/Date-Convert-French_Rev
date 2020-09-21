@@ -21,14 +21,13 @@ GetOptions('lang=s' => \$lang, 'kitten=s' => \$pict);
 #
 # I18N
 #
-my $ref_labels;
+our %labels;
 if ($lang eq 'fr') {
-  $ref_labels = do "$FindBin::Bin/labels_fr";
+  do "$FindBin::Bin/labels_fr";
 }
 else {
-  $ref_labels = do "$FindBin::Bin/labels_en";
+  do "$FindBin::Bin/labels_en";
 }
-my %labels = %$ref_labels;
 
 binmode STDOUT, ':utf8';
 

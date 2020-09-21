@@ -224,7 +224,7 @@ et vous obtiendrez
 <strong>$gr_date</strong>.
 EOT
 
-\%labels;
+%main::labels = %labels;
 
 __END__
 

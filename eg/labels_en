@@ -184,8 +184,4 @@ you use <em>$formula</em>, and you get
 <strong>$gr_date</strong>.
 EOT
 
-#
-# do cannot return a list value. Therefore, instead of a hash, we return a
-# hash reference.
-#
-\%labels;
+%main::labels = %labels;

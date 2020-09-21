@@ -110,14 +110,14 @@ if (DEBUG)
 
 # Some language-dependant variables are set in the "done" files.
 # Therefore, they cannot be "my" variables, they must be global.
-# I don't use "our", because it would break in older versions.
 
-my $ref_labels;
-if ($lang eq 'fr')
-  { $ref_labels = do "$FindBin::Bin/labels_fr" }
-else
-  { $ref_labels = do "$FindBin::Bin/labels_en" }
-my %labels = %$ref_labels;
+our %labels;
+if ($lang eq 'fr') {
+  do "$FindBin::Bin/labels_fr";
+}
+else {
+  do "$FindBin::Bin/labels_en";
+}
 
 html_1($labels{title1});
 html_2($_) foreach (@parts);
