@@ -54,11 +54,13 @@ lib/Date/Convert/French_Rev.pm top of the file
 lib/Date/Convert/French_Rev.pm POD "LICENSE" paragraph
 -- GPL mandated comment
 -- copyright years
+-- https instead of http
 
 Makefile.PL
 -- version number
 -- GPL mandated comment
 -- copyright years
+-- https instead of http
 
 t/*.t
 -- GPL mandated comment
