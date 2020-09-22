@@ -22,7 +22,7 @@ require Exporter;
 @EXPORT = qw(
 
 );
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use constant REV_BEGINNING => 2375840; # 1 Vendémiaire I in the Revolutionary calendar
 my @MONTHS_SHORT  = qw ( Vnd Bru Fri Niv Plu Vnt Ger Flo Pra Mes The Fru S-C);
