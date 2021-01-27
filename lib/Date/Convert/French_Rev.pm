@@ -1,7 +1,7 @@
 # -*- encoding: utf-8; indent-tabs-mode: nil -*-
 #
 #     Perl Date::Convert extension to convert dates from/to the French Revolutionary calendar
-#     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015, 2020, 2021 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -647,34 +647,6 @@ C<Date::Convert::French_Rev::initialize>.
 
 =back
 
-=head1 KNOWN BUGS AND CAVEATS
-
-Not many bugs, but many caveats.
-
-My sources  disagree about the 4th  additional day. One  says "jour de
-l'opinion", the other says "jour de la raison".
-
-Another disagreement is  that some sources ignore the  Romme rule, and
-use only the equinox rule. So, a 1- or 2-day difference can happen.
-
-This  module  inherits  its  user  interface  from  Mordechai  Abzug's
-C<Date::Convert>,  which is,  according to  its author,  "in pre-alpha
-state".  Therefore, my  module's  user interface  is  also subject  to
-changes.
-
-I  have checked the  manpage for  C<date(1)> in  two flavors  of Unix:
-Linux and AIX. In the best case, the extended field descriptors C<%Ex>
-and C<%Oy> are poorly documented, but usually they are not documented.
-
-The C<Test::Exception>  and C<Test::Warning> modules are  required for
-the    build    process,    not     for    the    regular    use    of
-C<Date::Convert::French_Rev>.
-
-You should  not use the  C<%L> strftime  specifier. For the  moment it
-prints the  year, but in some  next release, about in  Vendémiaire 231
-(that is, September 2022) it will produce a warning. And after another
-two years it will be removed.
-
 =head1 HISTORICAL NOTES
 
 The Revolutionary calendar was in  use in France from 24 November 1793
@@ -707,6 +679,49 @@ Carlyle proposes these translations for the month names:
   Messidor    -> Reapidor
   Thermidor   -> Heatidor
   Fructidor   -> Fruitidor
+
+=head1 KNOWN BUGS AND CAVEATS
+
+Not many bugs, but many caveats.
+
+My sources  disagree about the 4th  additional day. One  says "jour de
+l'opinion", the other says "jour de la raison".
+
+Another disagreement is  that some sources ignore the  Romme rule, and
+use only the equinox rule. So, a 1- or 2-day difference can happen.
+
+This  module  inherits  its  user  interface  from  Mordechai  Abzug's
+C<Date::Convert>,  which is,  according to  its author,  "in pre-alpha
+state".  Therefore, my  module's  user interface  is  also subject  to
+changes.
+
+I  have checked the  manpage for  C<date(1)> in  two flavors  of Unix:
+Linux and AIX. In the best case, the extended field descriptors C<%Ex>
+and C<%Oy> are poorly documented, but usually they are not documented.
+
+The C<Test::Exception>  and C<Test::Warning> modules are  required for
+the    build    process,    not     for    the    regular    use    of
+C<Date::Convert::French_Rev>.
+
+You should  not use the  C<%L> strftime  specifier. For the  moment it
+prints the  year, but in some  next release, about in  Vendémiaire 231
+(that is, September 2022) it will produce a warning. And after another
+two years it will be removed.
+
+=head1 SUPPORT
+
+Please  report any  requests, suggestions  or bugs  via Github.  Go to
+L<https://github.com/jforget/Date-Convert-French_Rev>,  and create  an
+issue or submit a pull request.
+
+If you have no feedback after a week  or so, you can reach me by email
+at JFORGET  at cpan dot org.  Please mention the distribution  name in
+the subject, so  my spam filter and me will  easily dispatch the email
+to the proper folder.
+
+On the other hand, I may be on vacation. Do not be upset if the answer
+arrives after one or  two months. Be upset only if  you do not receive
+an answer to several emails over at least one year.
 
 =head1 AUTHOR
 
@@ -837,11 +852,11 @@ method.
 
 =head1 LICENSE
 
-Copyright  (c) 2001,  2002, 2003,  2013, 2015,  2020 Jean  Forget. All
-rights reserved.  This program is  free software. You  can distribute,
-modify, and otherwise mangle  Date::Convert::French_Rev under the same
-terms as Perl  5.16.3: GNU Public License version 1  or later and Perl
-Artistic License
+Copyright (c)  2001, 2002, 2003,  2013, 2015, 2020, 2021  Jean Forget.
+All  rights  reserved.   This  program  is  free   software.  You  can
+distribute,  modify,  and otherwise  mangle  Date::Convert::French_Rev
+under the same  terms as Perl 5.16.3: GNU Public  License version 1 or
+later and Perl Artistic License
 
 You can  find the text  of the licenses  in the F<LICENSE> file  or at
 L<https://dev.perl.org/licenses/artistic.html>

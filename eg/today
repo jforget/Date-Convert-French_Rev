@@ -3,7 +3,7 @@
 #
 #     Example of Date::Convert::French_Rev script to print the date in
 #     French Revolutionary format.
-#     Copyright (C) 2001-2003, 2013, 2015, 2020 Jean Forget
+#     Copyright (C) 2001-2003, 2013, 2015, 2020, 2021 Jean Forget
 #
 #     See the license in the embedded documentation below.
 #
@@ -57,11 +57,11 @@ Jean Forget <JFORGET@cpan.org>
 
 =head1 LICENSE
 
-Copyright  (c) 2001,  2002, 2003,  2013, 2015,  2020 Jean  Forget. All
-rights reserved.  This program is  free software. You  can distribute,
-modify, and otherwise mangle F<g2r_table> under the same terms as Perl
-5.16.3:  GNU Public  License  version  1 or  later  and Perl  Artistic
-License
+Copyright (c)  2001, 2002, 2003,  2013, 2015, 2020, 2021  Jean Forget.
+All  rights  reserved.   This  program  is  free   software.  You  can
+distribute, modify,  and otherwise mangle F<g2r_table>  under the same
+terms as Perl  5.16.3: GNU Public License version 1  or later and Perl
+Artistic License
 
 You can  find the text  of the licenses  in the F<LICENSE> file  or at
 L<https://dev.perl.org/licenses/artistic.html>

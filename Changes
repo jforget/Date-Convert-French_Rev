@@ -2,6 +2,7 @@
 Revision history for Perl extension Date::Convert::French_Rev.
 
 0.10  ????
+        - new bugtracker: Github instead of rt.cpan.org
 
 0.09  Primidi 1st Vendémiaire CCXXIX, jour du raisin, new year's day (Tuesday 22 September 2020)
         - fix a few typos in the feasts names (thank you Gérald)
