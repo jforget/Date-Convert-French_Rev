@@ -714,14 +714,15 @@ Please  report any  requests, suggestions  or bugs  via Github.  Go to
 L<https://github.com/jforget/Date-Convert-French_Rev>,  and create  an
 issue or submit a pull request.
 
-If you have no feedback after a week  or so, you can reach me by email
-at JFORGET  at cpan dot org.  Please mention the distribution  name in
-the subject, so  my spam filter and me will  easily dispatch the email
-to the proper folder.
+If you have no  feedback after a week or so, try to  reach me by email
+at JFORGET  at cpan  dot org.  The notification  from Github  may have
+failed to reach  me. In your message, please  mention the distribution
+name in the subject, so my spam filter and me will easily dispatch the
+email to the proper folder.
 
 On the other hand, I may be on vacation. Do not be upset if the answer
 arrives after one or  two months. Be upset only if  you do not receive
-an answer to several emails over at least one year.
+an answer to several emails over at least six months or one year.
 
 =head1 AUTHOR
 
